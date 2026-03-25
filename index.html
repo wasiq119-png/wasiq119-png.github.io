@@ -233,10 +233,10 @@
             <p class="text-center text-muted mb-4" style="max-width: 600px; margin: 0 auto 3rem auto;">Explore some of my side projects and interesting things I've built outside of work.</p>
 
             <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
-                <button class="btn btn-secondary" style="border-radius: 8px; padding: 0.6rem 1.2rem; background: transparent;">All Projects</button>
-                <button class="btn btn-outline" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">AI & Machine Learning</button>
-                <button class="btn btn-primary" style="border-radius: 8px; padding: 0.6rem 1.2rem; background: #ec4899; box-shadow: none;">Backend & APIs</button>
-                <button class="btn btn-outline" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">Full Stack</button>
+                <button class="btn btn-secondary filter-btn active" data-filter="all" style="border-radius: 8px; padding: 0.6rem 1.2rem; background: transparent;">All Projects</button>
+                <button class="btn btn-outline filter-btn" data-filter="ai" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">AI & Machine Learning</button>
+                <button class="btn btn-outline filter-btn" data-filter="backend" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">Backend & APIs</button>
+                <button class="btn btn-outline filter-btn" data-filter="fullstack" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">Full Stack</button>
             </div>
 
             <div style="position: relative; width: 100%; max-width: 1000px; margin: 0 auto; display: flex; align-items: center;">
@@ -263,7 +263,7 @@
                         }
                     </style>
                     <!-- DataOps Framework Card -->
-                    <div class="project-card glass-card" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('dataops-modal')">
+                    <div class="project-card glass-card" data-category="backend" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('dataops-modal')">
                         <div class="project-img" style="height: 480px; margin-bottom: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 2rem; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 40%, transparent 100%), url('assets/images/Microservices_app.png') center/cover no-repeat; position: relative; border-radius: inherit;">
                             <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; position: relative; z-index: 2; color: white;">Backend & APIs</span>
                             <h3 style="font-size: 2.2rem; margin-bottom: 1rem; position: relative; z-index: 2; color: white;">DataOps Framework</h3>
@@ -271,7 +271,7 @@
                     </div>
 
                     <!-- Neuro Tracker Card -->
-                    <div class="project-card glass-card" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('neuro-modal')">
+                    <div class="project-card glass-card" data-category="ai" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('neuro-modal')">
                         <div class="project-img" style="height: 480px; margin-bottom: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 2rem; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 20%, #4a90e2 100%); position: relative; border-radius: inherit;">
                             <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; position: relative; z-index: 2; color: white;">Healthcare App</span>
                             <h3 style="font-size: 2.2rem; margin-bottom: 1rem; position: relative; z-index: 2; color: white;">Neuro Tracker</h3>
@@ -412,28 +412,7 @@
             </div>
         </div>
         
-        <script>
-            function openModal(id) {
-                const modal = document.getElementById(id);
-                if(modal) {
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            }
-            function closeModal(id) {
-                const modal = document.getElementById(id);
-                if(modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            }
-            // Close on outside click
-            window.addEventListener('click', function(e) {
-                if (e.target.id === 'dataops-modal' || e.target.id === 'neuro-modal') {
-                    closeModal(e.target.id);
-                }
-            });
-        </script>
+
 
         <!-- Contact Section -->
         <section id="contact" class="section flex-col-center hidden mb-20">
