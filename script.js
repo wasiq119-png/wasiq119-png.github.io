@@ -83,7 +83,7 @@ window.addEventListener("scroll", () => {
 });
 
 // Spotlight Hover Effect
-document.querySelectorAll('.spotlight-wrapper, .glass-card').forEach(wrapper => {
+document.querySelectorAll('.spotlight-wrapper, .glass-card:not(.project-card), .project-card').forEach(wrapper => {
     wrapper.addEventListener('mousemove', e => {
         const rect = wrapper.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -91,4 +91,51 @@ document.querySelectorAll('.spotlight-wrapper, .glass-card').forEach(wrapper => 
         wrapper.style.setProperty('--mouse-x', `${x}px`);
         wrapper.style.setProperty('--mouse-y', `${y}px`);
     });
+});
+
+// Project Filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Update active button
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+                card.classList.remove('hidden-project');
+            } else {
+                card.classList.add('hidden-project');
+            }
+        });
+    });
+});
+
+// Modal Functions
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close on outside click
+window.addEventListener('click', function(e) {
+    if (e.target.id === 'dataops-modal' || e.target.id === 'neuro-modal') {
+        closeModal(e.target.id);
+    }
 });
