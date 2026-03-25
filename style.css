@@ -478,7 +478,7 @@ h1, h2, h3, h4 {
 /* Projects */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
   width: 100%;
 }
@@ -505,7 +505,7 @@ h1, h2, h3, h4 {
 /* Spotlight Flow Grid */
 .spotlight-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
   gap: 1.5rem;
   width: 100%;
   max-width: 1000px;
@@ -603,5 +603,42 @@ h1, h2, h3, h4 {
   }
   .about-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .type-wrap, .cursor {
+    font-size: 1.5rem !important;
+  }
+  .section-title {
+    font-size: 2.2rem;
+  }
+  .glass-card, .spotlight-card {
+    padding: 1.5rem;
+  }
+  .profile-container {
+    width: 250px;
+    height: 250px;
+  }
+  .floating-nav {
+    width: 92vw;
+    padding: 0.6rem 1.2rem;
+    gap: 0;
+    justify-content: space-between;
+    bottom: 1rem;
+  }
+  .nav-item {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  .nav-item[data-tooltip]::before {
+    display: none !important;
   }
 }
