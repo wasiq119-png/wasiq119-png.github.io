@@ -659,4 +659,47 @@ h1, h2, h3, h4 {
   .nav-item[data-tooltip]::before {
     display: none !important;
   }
+
+  /* Responsive Projects */
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .project-card {
+    width: 85vw !important;
+    min-width: unset !important;
+    max-width: 450px;
+  }
+
+  .project-img {
+    height: 380px !important;
+  }
+  
+  .project-img h3 {
+    font-size: 1.8rem !important;
+  }
+
+  /* Responsive Modals */
+  .modal-content {
+    padding: 1.5rem !important;
+    border-radius: 0 !important;
+    min-height: 100vh;
+  }
+
+  .modal-content h2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* Modal Default Styles */
+.modal-content {
+  padding: 3rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 601px) {
+    .modal-content {
+        border-radius: 24px !important;
+    }
 }

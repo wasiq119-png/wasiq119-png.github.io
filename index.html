@@ -241,7 +241,7 @@
 
             <div style="position: relative; width: 100%; max-width: 1000px; margin: 0 auto; display: flex; align-items: center;">
                 
-                <button onclick="document.getElementById('projects-scroller').scrollBy({left:-400, behavior:'smooth'})" class="glass-card" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-right: 15px; flex-shrink: 0; z-index: 5;">
+                <button onclick="document.getElementById('projects-scroller').scrollBy({left:-400, behavior:'smooth'})" class="glass-card hide-on-mobile" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-right: 15px; flex-shrink: 0; z-index: 5;">
                     <i class="fa-solid fa-chevron-left" style="color: white; font-size: 1.2rem;"></i>
                 </button>
 
@@ -284,15 +284,15 @@
                     </div>
                 </div>
 
-                <button onclick="document.getElementById('projects-scroller').scrollBy({left:400, behavior:'smooth'})" class="glass-card" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-left: 15px; flex-shrink: 0; z-index: 5;">
+                <button onclick="document.getElementById('projects-scroller').scrollBy({left:400, behavior:'smooth'})" class="glass-card hide-on-mobile" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-left: 15px; flex-shrink: 0; z-index: 5;">
                     <i class="fa-solid fa-chevron-right" style="color: white; font-size: 1.2rem;"></i>
                 </button>
             </div>
         </section>
 
         <!-- DataOps Modal Structure -->
-        <div id="dataops-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
-            <div class="glass-card" style="width: 100%; max-width: 900px; margin: auto; position: relative; padding: 3rem; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
+        <div id="dataops-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
+            <div class="glass-card modal-content" style="width: 100%; max-width: 900px; margin: auto; position: relative; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
                 <button onclick="closeModal('dataops-modal')" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.9); border: none; color: black; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-xmark"></i></button>
                 
                 <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">Backend & APIs</span>
@@ -354,8 +354,8 @@
         </div>
 
         <!-- Neuro Tracker Modal Structure -->
-        <div id="neuro-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
-            <div class="glass-card" style="width: 100%; max-width: 900px; margin: auto; position: relative; padding: 3rem; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
+        <div id="neuro-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
+            <div class="glass-card modal-content" style="width: 100%; max-width: 900px; margin: auto; position: relative; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
                 <button onclick="closeModal('neuro-modal')" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.9); border: none; color: black; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-xmark"></i></button>
                 
                 <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">Mobile App & Healthcare</span>
