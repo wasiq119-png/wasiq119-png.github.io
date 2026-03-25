@@ -83,7 +83,7 @@ window.addEventListener("scroll", () => {
 });
 
 // Spotlight Hover Effect
-document.querySelectorAll('.spotlight-wrapper, .glass-card, .section').forEach(wrapper => {
+document.querySelectorAll('.spotlight-wrapper, .glass-card').forEach(wrapper => {
     wrapper.addEventListener('mousemove', e => {
         const rect = wrapper.getBoundingClientRect();
         const x = e.clientX - rect.left;
