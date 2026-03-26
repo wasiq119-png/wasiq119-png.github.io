@@ -65,6 +65,43 @@ body {
   100% { transform: translate(0, 0) scale(1); }
 }
 
+/* 3D Cyber Background */
+#cyber-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.perspective-grid {
+  position: fixed;
+  bottom: -40vh;
+  left: -50vw;
+  width: 200vw;
+  height: 150vh;
+  background-image: 
+    linear-gradient(rgba(168, 85, 247, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(100vh) rotateX(60deg) translateY(var(--scroll-y, 0));
+  z-index: -3;
+  mask-image: linear-gradient(to top, black 20%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, black 20%, transparent 80%);
+  transition: transform 0.2s linear;
+  pointer-events: none;
+}
+
+.perspective-grid::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, transparent, var(--bg-color) 80%);
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;

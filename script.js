@@ -64,22 +64,106 @@ document.querySelectorAll('.hidden').forEach((el) => {
 const sections = document.querySelectorAll("section");
 const navItems = document.querySelectorAll(".nav-item");
 
-window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach((section) => {
+// 3D Cyber Background Particle System
+const canvas = document.getElementById('cyber-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: null, y: null };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('mousemove', e => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Mouse repulsion
+        if (mouse.x && mouse.y) {
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 100) {
+                this.x -= dx / 20;
+                this.y -= dy / 20;
+            }
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+            this.reset();
+        }
+    }
+    draw() {
+        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    resizeCanvas();
+    particles = [];
+    for (let i = 0; i < 80; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+// Initializing Cyber Background
+initParticles();
+animate();
+
+// Modern Scroll Interaction
+window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    
+    // Update active section in nav
+    let currentSection = '';
+    document.querySelectorAll('section').forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - sectionHeight / 3) {
-            current = section.getAttribute("id");
+        if (scrollPos >= sectionTop - 150) {
+            currentSection = section.getAttribute('id');
         }
     });
 
-    navItems.forEach((item) => {
-        item.classList.remove("active");
-        if (item.getAttribute("href") === `#${current}`) {
-            item.classList.add("active");
+    document.querySelectorAll('.nav-item').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(currentSection)) {
+            link.classList.add('active');
         }
     });
+
+    // 3D Grid Parallax
+    document.documentElement.style.setProperty('--scroll-y', `${scrollPos * 0.15}px`);
 });
 
 // Spotlight Hover Effect
