@@ -283,6 +283,12 @@
                             transform: translateY(-8px) scale(1.02);
                             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.2);
                         }
+                        @media (max-width: 600px) {
+                            .project-card:hover {
+                                transform: none !important;
+                                box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+                            }
+                        }
                         .project-img {
                             transition: filter 0.6s ease;
                         }
