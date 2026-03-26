@@ -133,9 +133,9 @@ function closeModal(id) {
     }
 }
 
-// Close on outside click
+// Close on outside click for all modals
 window.addEventListener('click', function(e) {
-    if (e.target.id === 'dataops-modal' || e.target.id === 'neuro-modal') {
+    if (e.target.classList.contains('modal-overlay')) {
         closeModal(e.target.id);
     }
 });
