@@ -1,5 +1,5 @@
 // Typing Animation
-const words = ["Angular Applications", "Spring Boot APIs", "Interactive UIs", "Scalable Systems"];
+const words = ["Angular & React Apps", "Java & Python Backend", "Modern Node.js APIs", "Interactive Full-Stack Solutions"];
 let i = 0;
 let j = 0;
 let isDeleting = false;
@@ -49,9 +49,18 @@ const observerOptions = {
 };
 
 const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('show');
+            if (entry.target.classList.contains('skill-item')) {
+                // Staggered reveal for skills
+                const skills = Array.from(document.querySelectorAll('.skill-item'));
+                const skillIndex = skills.indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.classList.add('show');
+                }, skillIndex * 100);
+            } else {
+                entry.target.classList.add('show');
+            }
         }
     });
 }, observerOptions);
@@ -59,6 +68,24 @@ const observer = new IntersectionObserver((entries, observer) => {
 document.querySelectorAll('.hidden').forEach((el) => {
     observer.observe(el);
 });
+
+// Copy to Clipboard Feature
+function copyText(text, el) {
+    navigator.clipboard.writeText(text).then(() => {
+        const icon = el.querySelector('i');
+        const originalClass = icon.className;
+        
+        icon.className = 'fa-solid fa-check';
+        el.style.color = 'var(--accent-2)';
+        el.style.opacity = '1';
+
+        setTimeout(() => {
+            icon.className = originalClass;
+            el.style.color = '';
+            el.style.opacity = '0.5';
+        }, 1500);
+    });
+}
 
 // Navigation Highlight
 const sections = document.querySelectorAll("section");
