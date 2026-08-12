@@ -1,0 +1,12 @@
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.lnk
+
+# Local-only credential / secret files (never commit)
+*Credentials*.txt
+*credentials*.txt
+*password*.txt
+*secret*.txt
+*.env
+.env.*
