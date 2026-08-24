@@ -11,48 +11,95 @@ before considering any task done. Never delete closed bug entries — mark them.
 - Owner: Wasiq Mudasar, Angular/Full-Stack engineer. Site targets desktop +
   mobile (iPhone and Android/Pixel Chrome are the tested targets).
 
-## 2. File map (confirmed 2026-08-24, matches spec — no drift)
-- `index.html` — single page, all content (34,586 bytes)
+## 2. File map (re-confirmed 2026-08-24 resync, matches spec — no drift)
+- `index.html` — single page, all content (34,653 bytes as of the latest
+  commit on `main`; grew slightly from the `rel="noopener"` + pinch-zoom
+  viewport-meta fixes)
 - `style.css` — all styling, CSS custom props in `:root` + a HARDENING
-  utility-class block (32,287 bytes, 260 open / 260 close braces — balanced)
+  utility-class block (32,287 bytes, 260 open / 260 close braces — balanced,
+  re-verified this resync)
 - `script.js` — all behavior: typewriter, reveal, particles, nav highlight,
   modals, project filter, copy-to-clipboard, canvas throttle (9,884 bytes,
-  `node -c` parses clean)
+  `node -c` parses clean, re-verified this resync)
 - `assets/images/` — exactly 5 files, all real and all referenced:
   `wasiq.jpg`, `Inseyab Certification_page-0001.jpg`,
   `TV x Internship Certificate_page-0001.jpg`, `Microservices_app.png`,
   `favicon.ico`. No orphans, no legacy template assets.
-- `service-list.html` — confirmed absent (deleted per 48186b9).
-- Untracked in repo root (not part of site): `.claude/` (agent config incl.
-  this agent's spec at `.claude/agents/portfolio-engineer.md`), `.clineignore`.
+- `service-list.html` — confirmed absent (deleted per the "purge legacy
+  bloat" commit, see §3 for current hash).
+- **Tracked as of this resync**: `.claude/agents/portfolio-engineer.md` and
+  `MEMORY.md` itself were committed in the "chore(agent)" commit (see §3) —
+  they are no longer untracked. Only `.clineignore` remains untracked in the
+  repo root (not part of the site; a tool-config file, correctly left out of
+  version control per spec §7).
 - `.gitignore` covers OS junk, `*.lnk`, and common credential-filename globs
   (`*Credentials*.txt`, `*password*.txt`, `*secret*.txt`, `.env*`) — good
   baseline, no secrets tracked as of this snapshot.
 
 ## 3. Work history (git log, newest first) — do not redo or regress
-- **2463c51** `fix(mobile): move overflow-x:hidden from html to body to fix
-  fixed dock nav` — NOT previously recorded in agent memory (drift found this
-  session). Root cause: `overflow-x` on the root `<html>` element breaks the
-  containing block for `position:fixed` descendants on several mobile
-  browsers, causing the floating dock to scroll with the page instead of
-  staying pinned. One-line CSS fix. **Add this to the permanent record.**
-- **b69751f** `fix(mobile): eliminate dock roaming` — removed
-  `backdrop-filter` on touch (solid bar instead), `scroll-behavior: auto` on
-  touch (no smooth-scroll pill sweep), froze canvas background + parallax
-  grid on touch, `viewport-fit=cover` + `interactive-widget=resizes-visual`,
-  `safe-area-inset-bottom` on the dock.
-- **424ea88** `fix(mobile): stop floating dock jitter` — replaced
+
+> **HASH-REWRITE NOTICE (found during 2026-08-24 resync)**: this repo's
+> reflog shows a `filter-branch: rewrite` event. Every commit from the
+> "hardening pass" onward was rewritten with a **new SHA**, same messages
+> and content. The OLD hashes previously recorded in memory/agent-prompt
+> docs (`67a0bcc`, `48186b9`, `424ea88`, `b69751f`, `2463c51`, plus an
+> intermediate `70caf09`) are now **dangling / unreachable from `main`**
+> (`git branch --contains <old-hash>` returns nothing). They still exist as
+> loose objects (visible via `git log --oneline --all` / reflog) but do NOT
+> appear in `git log` on `main`. **Use the current hashes below.** If you
+> ever see one of the old hashes cited elsewhere, treat it as the same
+> historical work under a different SHA, not as missing/undone work.
+
+- **8c95464** `chore(agent): add portfolio-engineer custom agent + project
+  MEMORY.md` — persisted the agent spec (`.claude/agents/portfolio-engineer.md`)
+  and this MEMORY.md into the tracked repo (previously untracked / test-run
+  only). *(current SHA of what was originally committed as `956c403`.)*
+- **020ca00** `fix(mobile): lock pinch-zoom to stop fixed dock/nav drift` —
+  `maximum-scale=1.0, user-scalable=no` added to the viewport meta tag.
+  Root cause: `position:fixed` elements (dock, cyber-canvas, perspective
+  grid) recompute against the layout viewport mid-pinch-gesture, producing
+  visible drift/resnap; locking zoom removes the gesture entirely.
+  *(current SHA of what was originally committed as `e1c8822`.)*
+- **22b786c** `fix(security): add rel=noopener to LinkedIn/GitHub external
+  links` — closed the two detail-card anchors (lines 517, 529) that were
+  still missing `rel="noopener"` after an earlier audit; all 5
+  `target="_blank"` anchors in `index.html` now carry `rel="noopener"`
+  (verified this resync). *(current SHA of what was originally committed as
+  `70caf09`.)*
+- **e0bbd63** `fix(mobile): move overflow-x:hidden from html to body to fix
+  fixed dock nav` — root cause: `overflow-x` on the root `<html>` element
+  breaks the containing block for `position:fixed` descendants on several
+  mobile browsers, causing the floating dock to scroll with the page instead
+  of staying pinned. One-line CSS fix; confirmed present in current
+  `style.css` (`body { overflow-x: hidden }`, `html` has no `overflow-x`).
+  *(current SHA of what was originally committed as `2463c51`.)*
+- **a0f26ce** `fix(mobile): eliminate dock roaming - remove backdrop blur on
+  touch for solid bar, disable smooth-scroll pill sweep, keep frozen bg` —
+  removed `backdrop-filter` on touch (solid bar instead), `scroll-behavior:
+  auto` on touch (no smooth-scroll pill sweep), froze canvas background +
+  parallax grid on touch, `viewport-fit=cover` +
+  `interactive-widget=resizes-visual`, `safe-area-inset-bottom` on the dock.
+  Confirmed present this resync in `style.css` `@media (pointer: coarse)`
+  block (~line 1446). *(current SHA of what was originally committed as
+  `b69751f`.)*
+- **1101e5e** `fix(mobile): stop floating dock jitter` — replaced
   scroll-event nav-highlight with `IntersectionObserver`, rAF + pass-throttled
   parallax, 100svh fallbacks, canvas reduced to 40 particles / ~30fps on
-  phones.
-- **48186b9** purged legacy Bootstrap template assets (vendor css/js, icofont
+  phones. *(current SHA of what was originally committed as `424ea88`.)*
+- **91ab7b9** purged legacy Bootstrap template assets (vendor css/js, icofont
   fonts ~4MB, `assets/scss` tree, placeholder images) + orphaned
-  `service-list.html`; wired favicon.
-- **67a0bcc** purged ~210 inline styles into CSS utility classes, removed
+  `service-list.html`; wired favicon. *(current SHA of what was originally
+  committed as `48186b9`.)*
+- **2f642b5** purged ~210 inline styles into CSS utility classes, removed
   purple/pink residues, added fluid `clamp()` typography, fixed a missing
   closing brace on `.copy-hint:hover` and a stray trailing brace. Always
-  re-check brace balance after CSS edits (this session: confirmed 260/260,
-  still balanced).
+  re-check brace balance after CSS edits (this resync: confirmed 260/260,
+  still balanced). *(current SHA of what was originally committed as
+  `67a0bcc`.)*
+
+Chronological summary for a fresh agent (oldest → newest, current SHAs):
+`2f642b5` → `91ab7b9` → `1101e5e` → `a0f26ce` → `e0bbd63` → `22b786c` →
+`020ca00` → `8c95464`.
 
 ## 4. Design system (protect unless changed with intent)
 Palette (2026 Neo-Brutalist/Obsidian):
@@ -92,11 +139,14 @@ machine going forward**, not `python -m http.server`.
   - Line 110 GitHub icon link — had `rel="noopener"` already. OK.
   - Line 111 LinkedIn icon link — had `rel="noopener"` already. OK.
   - Line 517 LinkedIn detail-card link — **was MISSING `rel="noopener"`**.
-    **FIXED this session** (trivial, obviously-safe edit per test protocol;
-    left unstaged, visible in `git diff`).
+    Fixed and **committed** in `22b786c` (was staged/unstaged in an earlier
+    test-run; now landed on `main`).
   - Line 529 GitHub detail-card link — **was MISSING `rel="noopener"`**.
-    **FIXED this session** (same fix, unstaged).
-  - Status: all 5 now carry `rel="noopener"` in the working tree (uncommitted).
+    Fixed and **committed** in `22b786c` (same commit).
+  - Status: all 5 `target="_blank"` anchors in `index.html` carry
+    `rel="noopener"` — verified in the tracked, committed file this resync
+    (`grep -n 'target="_blank"' index.html` shows `rel="noopener"` on every
+    match). Fully closed, nothing left uncommitted.
 - **Third-party loads**: `fonts.googleapis.com` / `fonts.gstatic.com`
   (preconnect + stylesheet, Google Fonts), `cdnjs.cloudflare.com` (Font
   Awesome 6.4.0 full CSS bundle). No `<script src="https://...">` third-party
@@ -127,45 +177,56 @@ machine going forward**, not `python -m http.server`.
 
 ## 7. Open bugs
 
-### OPEN — Mobile dock jitter/roaming, visual confirmation still outstanding
-Status as of 2026-08-24: **code-level review only, NOT visually verified**
-(no Android/Chrome device or browser driver available in this session).
+### ADDRESSED (not yet visually reconfirmed) — Mobile dock jitter/roaming
+Status as of 2026-08-24 resync: **four separate hardening commits have now
+targeted this specific complaint** (`2f642b5`→`91ab7b9`→`1101e5e`→`a0f26ce`
+→`e0bbd63`→`020ca00`, current SHAs, see §3), each fixing a distinct
+mechanism. This is a broader/deeper fix set than the single "dock roaming"
+commit that was open at the last handoff. **Still no real-device visual
+confirmation has been performed in any session** (no Android/Chrome device
+or browser driver available) — so this stays open-but-downgraded rather than
+CLOSED, per SOP §6 ("if you changed UX, confirm visual/behavior... or
+explicitly flag not visually verified").
 
-Code-level findings (all mitigations claimed in b69751f/424ea88/2463c51 are
-**confirmed present in current code**):
+Code-level findings, all confirmed present in the current tracked code this
+resync:
 - `style.css` `.floating-nav`: `position: fixed`, `bottom: max(1rem,
   env(safe-area-inset-bottom))` — present.
-- `@media (pointer: coarse)` block (style.css ~line 1446): `html {
-  scroll-behavior: auto }`, `.floating-nav` backdrop-filter removed + solid
-  `rgba(10,12,18,0.98)` background, `.nav-item` transition reduced to
-  color/opacity only, tooltip `::before` hidden — all present exactly as
-  the commit messages describe.
+- `@media (pointer: coarse)` block (style.css ~line 1446, from `a0f26ce`):
+  `html { scroll-behavior: auto }`, `.floating-nav` backdrop-filter removed
+  + solid `rgba(10,12,18,0.98)` background, `.nav-item` transition reduced
+  to color/opacity only, tooltip `::before` hidden — present.
+- `body { overflow-x: hidden }` / `html` has no `overflow-x` (from
+  `e0bbd63`) — fixes `position:fixed` containing-block breakage that was
+  causing the dock to scroll with the page on some mobile browsers.
+- Viewport meta (index.html line 6) now has `maximum-scale=1.0,
+  user-scalable=no` (from `020ca00`, pinch-zoom lock) in addition to the
+  earlier `viewport-fit=cover` + `interactive-widget=resizes-visual` — this
+  targets a *different* drift mechanism (fixed elements recalculating mid
+  pinch-gesture), independent of the scroll/backdrop fixes above.
 - `script.js`: `isCoarsePointer()` helper (pointer:coarse matchMedia) gates
-  the canvas — on touch, particles are drawn **once** and the
-  `requestAnimationFrame` animate loop is never started (frozen background,
-  confirmed at script.js ~line 210-219). Parallax grid loop
-  (`parallaxLoop`, ~line 241) is likewise skipped entirely when
-  `isCoarsePointer()` is true.
-- Nav active-state uses `IntersectionObserver` (`navSpy`, ~line 224), not a
-  scroll listener — matches the 424ea88 claim.
-- Viewport meta tag (index.html line 6) has both `viewport-fit=cover` and
-  `interactive-widget=resizes-visual`.
-- `overflow-x: hidden` confirmed on `body`, not `html` (2463c51 fix present).
+  the canvas — on touch, particles are drawn once, `requestAnimationFrame`
+  loop never starts (frozen background). Parallax grid loop likewise
+  skipped when `isCoarsePointer()` is true.
+- Nav active-state uses `IntersectionObserver`, not a scroll listener.
 
 **Conclusion**: every mitigation the commit messages claim is actually
-present in the working code — this is not a case of a commit message
-overselling an incomplete fix. However, none of this has been visually
-verified on a real Android/Pixel Chrome device this session. Next agent
-with device/browser access should do a real visual pass before this can be
-marked CLOSED.
+present in the working code, and the fix set now covers all four levers
+listed in the original "possible next levers" list (dual bottom/vv-vh units
+→ overflow-x fix; smooth-scroll → scroll-behavior:auto; canvas-on-touch →
+isCoarsePointer freeze; pinch-gesture recalculation → zoom lock). **A future
+agent with real Android/Pixel Chrome or iPhone access should still do one
+visual pass to close this out formally**, but there is no known remaining
+code-level cause to chase blindly — do not re-open this by guessing at new
+mechanisms without a fresh repro.
 
 ### CLOSED — Inline styles / purple-pink palette regression
 Verified clean this session (0 inline styles, 0 palette residuals). Keep
 checking after any future CSS/HTML edit — do not regress.
 
-### CLOSED (this session) — Missing rel="noopener" on 2 detail-card anchors
-Fixed lines 517 and 529 of index.html. Left unstaged per test-run
-constraints; needs to be committed by a session with commit permission.
+### CLOSED — Missing rel="noopener" on 2 detail-card anchors
+Fixed lines 517 and 529 of index.html; committed in `22b786c`. Verified in
+tracked file this resync — fully closed, no further action.
 
 ### OPEN — Font Awesome CDN dependency
 Not fixed, tracked as a recommendation (see Security scan above).
@@ -187,11 +248,32 @@ link for an export URL (see Security scan above).
   `grep -n 'target="_blank"' index.html` before considering an HTML change
   done.
 
-## 9. Test-run note
-This MEMORY.md was created during a validation run of the
-portfolio-engineer agent spec (`.claude/agents/portfolio-engineer.md`).
-Commit/push were disabled for that run — the two `rel="noopener"` fixes
-above are present in the working tree but **not committed**. A future
-session with commit permission should stage `index.html` and commit them
-(e.g. `fix(security): add rel=noopener to detail-card external links`),
-then continue from the open-bugs list in section 7.
+## 9. Test-run note (historical) + 2026-08-24 resync note
+
+This MEMORY.md was originally created during a validation run of the
+portfolio-engineer agent spec. That run's `rel="noopener"` fixes and the
+agent-spec/MEMORY.md files themselves were later committed (see §3:
+`22b786c`, `8c95464`) by a session with commit permission — the
+"not committed" caveat that used to live here no longer applies.
+
+**2026-08-24 resync (this session)**: compared this file, the agent prompt
+file (`.claude/agents/portfolio-engineer.md`), and `git log` against the
+actual working tree. Found and corrected:
+- §3 was missing 5 newer commits (`a0f26ce`, `e0bbd63`, `22b786c`,
+  `020ca00`, `8c95464`) — added, verified each against the working code.
+- §2 incorrectly listed `.claude/` and `MEMORY.md` as untracked — they are
+  now tracked/committed; only `.clineignore` remains untracked.
+- §6 rel=noopener status was stale ("unstaged") — now committed and closed.
+- §7's dock-roaming bug is now addressed by 4 additional targeted commits
+  beyond what was open at the last handoff — downgraded from fully-open to
+  "addressed, pending visual reconfirmation" (see §7), not closed outright
+  since no real-device pass has happened yet.
+- **New finding, not previously recorded anywhere**: the repo's reflog shows
+  a `git filter-branch: rewrite` event that changed the SHA of every commit
+  from "hardening pass" onward. All old hashes cited in the agent prompt
+  file's WORK HISTORY (§3 there) are dangling/unreachable from `main`. See
+  the HASH-REWRITE NOTICE in §3 above for the old→new mapping. The agent
+  prompt file itself has been updated with a pointer to this note (small,
+  factual edit only — not a full rewrite of that file).
+This session made no code changes to index.html/style.css/script.js — this
+was a memory-resync-only task, no commit/push performed (per instructions).

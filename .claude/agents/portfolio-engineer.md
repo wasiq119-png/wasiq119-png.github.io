@@ -51,24 +51,44 @@ do not regress them. Semantic landmarks (<header>,<main>,<section>,<footer>) int
 ================================================================================
 3. WORK HISTORY (what was already done — don't redo or regress)
 ================================================================================
-- commit 67a0bcc : HARD grains+palette cleanup. Purged ~210 inline styles into CSS
-  utility classes. Removed purple/pink residues (style.css, script.js canvas).
-  Added fluid clamp() typography. FIXED two broken CSS rules:
+NOTE (2026-08-24 memory resync): this repo underwent a `git filter-branch`
+rewrite that changed every commit SHA below to a new hash with identical
+content/messages. The hashes as originally recorded here (67a0bcc, 48186b9,
+424ea88, b69751f) are now dangling/unreachable from `main` — do not be
+alarmed if `git show <hash>` fails for them. See MEMORY.md section 3 for the
+full old-hash -> current-hash mapping and the 5 newer commits that landed
+after this list was last written (a0f26ce/e0bbd63/22b786c/020ca00/8c95464 —
+current hashes; see MEMORY.md for what each one did). Treat MEMORY.md's
+work-history section as the source of truth going forward; this section is
+kept only as an abbreviated pointer.
+
+- commit 67a0bcc (now 2f642b5) : HARD grains+palette cleanup. Purged ~210 inline
+  styles into CSS utility classes. Removed purple/pink residues (style.css,
+  script.js canvas). Added fluid clamp() typography. FIXED two broken CSS rules:
     * `.copy-hint:hover` was missing a closing brace (broke following rules).
     * stray `}` at EOF.
   Always re-check brace balance after CSS edits (you saw this bite before).
-- commit 48186b9 : SCRUBBED legacy bloat — deleted bootstrap/vendor/plugins css+js,
-  icofont fonts (~4MB), entire assets/scss tree, placeholder images, and
-  service-list.html. Added `<link rel="icon">` for favicon.
-- commit 424ea88 : MOBILE JITTER, part 1. Replaced the scroll-event nav-highlight
-  (layout reads on every scroll event) with an IntersectionObserver. Parallax
-  loop is rAF+pass-throttled, NOT on the raw scroll event. Stability of
+- commit 48186b9 (now 91ab7b9) : SCRUBBED legacy bloat — deleted bootstrap/vendor/
+  plugins css+js, icofont fonts (~4MB), entire assets/scss tree, placeholder
+  images, and service-list.html. Added `<link rel="icon">` for favicon.
+- commit 424ea88 (now 1101e5e) : MOBILE JITTER, part 1. Replaced the scroll-event
+  nav-highlight (layout reads on every scroll event) with an IntersectionObserver.
+  Parallax loop is rAF+pass-throttled, NOT on the raw scroll event. Stability of
   geometry via `100svh` fallbacks. Reduced canvas to 40 particles / ~30fps on phones.
-- commit b69751f : MOBILE DOCK "ROAMING". Removed backdrop-filter on touch
-  (solid bar), `scroll-behavior:auto` on touch (instant nav jumps, no pill sweep),
-  froze the background canvas + parallax grid on touch,
+- commit b69751f (now a0f26ce) : MOBILE DOCK "ROAMING", round 1. Removed
+  backdrop-filter on touch (solid bar), `scroll-behavior:auto` on touch (instant
+  nav jumps, no pill sweep), froze the background canvas + parallax grid on touch,
   viewport `interactive-widget=resizes-visual` + `viewport-fit=cover` to stop
   Android Chrome URL-bar resize, safe-area-inset-bottom on dock.
+- commit e0bbd63 : moved `overflow-x:hidden` from `<html>` to `<body>` — the
+  root-element overflow-x was breaking the containing block for `position:fixed`
+  descendants (the dock) on some mobile browsers.
+- commit 22b786c : added `rel="noopener"` to the 2 detail-card external links
+  that were still missing it (all 5 target=_blank anchors now covered).
+- commit 020ca00 : locked pinch-zoom (`maximum-scale=1.0, user-scalable=no` on
+  the viewport meta) — fixed `position:fixed` elements recalculating/drifting
+  mid pinch-gesture, a mechanism distinct from the scroll/backdrop fixes above.
+- commit 8c95464 : added this agent spec + MEMORY.md to version control.
 
 NEVER regress achievements above (inline-style bloat, purple residues, scroll
 event layout reads, live blur on mobile, animated background behind glass on touch).
@@ -76,18 +96,38 @@ event layout reads, live blur on mobile, animated background behind glass on tou
 ================================================================================
 4. CURRENT OPEN THREAT / UNCONFIRMED BUG
 ================================================================================
-The mobile bottom dock has been heavily hardened (commit b69751f). A lingering
-"roaming/jitter" complaint was reported but NOT confirmed resolved. Your FIRST task
-on handoff: with the user on an Android/Pixel Chrome, hard-refresh
-http://127.0.0.1:8080/ (local server) or the live GitHub Pages URL and confirm
-whether the dock is calm. If it STILL moves, log a REPRO (device + the exact motion)
-before : WHOLENAV moves vs icons jiggle vs pill jumps vs address-bar shift.
+UPDATE (2026-08-24 resync): since this section was last written, THREE more
+commits specifically targeted dock roaming/drift by distinct mechanisms —
+e0bbd63 (overflow-x containing-block fix), 22b786c (unrelated, security),
+020ca00 (pinch-zoom lock, fixes drift during pinch gestures specifically).
+Combined with the original b69751f/a0f26ce round, all 4 "possible next
+levers" listed below have now actually been addressed in code (verified
+present in style.css/index.html/script.js this resync — see MEMORY.md §7).
+This is NOT the same as visual confirmation — no session has yet had real
+device/browser access to confirm on-screen. Treat this as "addressed,
+pending visual reconfirmation," not "still fully open" — don't re-guess at
+new mechanisms without a fresh repro first.
 
-Possible next levers if it persists (investigate in this order, prove cause):
+The mobile bottom dock has been heavily hardened across several commits (see
+§3/MEMORY.md). A lingering "roaming/jitter" complaint was reported but NOT
+yet visually confirmed resolved on a real device. Your FIRST task on
+handoff, if you have device/browser access: with the user on an
+Android/Pixel Chrome, hard-refresh http://127.0.0.1:8080/ (local server) or
+the live GitHub Pages URL and confirm whether the dock is calm. If it STILL
+moves, log a REPRO (device + the exact motion) before: WHOLENAV moves vs
+icons jiggle vs pill jumps vs address-bar shift.
+
+Possible next levers if it persists (investigate in this order, prove cause;
+NOTE: levers 1-3 already have code-level fixes landed — re-verify they
+didn't regress before assuming they're the culprit again):
   1. Dual `bottom:` declarations / other vv/vh units still reflowing on collapse.
+     (overflow-x html->body fix landed in e0bbd63 — check for regressions first)
   2. Smooth-scroll between SECTIONS triggered elsewhere (not just taps).
+     (scroll-behavior:auto on touch landed in a0f26ce — check for regressions)
   3. Canvas fired on touch (isCoarsePointer guard bypassed by some viewport widths).
+     (pinch-gesture drift specifically addressed by zoom lock in 020ca00)
   4. Fallback to a TOP fixed nav bar for mobile (pattern immune to bottom URL-bar).
+     (not yet attempted — last resort if a fresh repro survives all of the above)
 Never blind-tune — verify a reproducing browser context first.
 
 ================================================================================
