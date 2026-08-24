@@ -163,6 +163,14 @@ function isPhoneViewport() {
     return w <= 768;
 }
 
+// True on phones/tablets (touch). We use this to STOP the animated
+// background on touch: anything moving behind the frosted dock makes
+// the nav look like it's swimming/roaming.
+function isCoarsePointer() {
+    return typeof window.matchMedia === 'function'
+        && window.matchMedia('(pointer: coarse)').matches;
+}
+
 function initParticles() {
     resizeCanvas();
     const count = isPhoneViewport() ? 40 : 80;
@@ -201,7 +209,14 @@ function animate() {
 
 // Initializing Cyber Background
 initParticles();
-animate();
+if (isCoarsePointer()) {
+    // Mobile touch: paint ONE static frame and stop. A frozen background
+    // means the glass dock has nothing moving behind it to "swim" against.
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => p.draw());
+} else {
+    animate();
+}
 
 // Active-section nav highlight via IntersectionObserver: no layout reads
 // inside a scroll listener, so the dock and page don't re-layout while you
@@ -230,7 +245,7 @@ let lastY = window.scrollY;
 window.addEventListener('scroll', () => { parallaxDirty = true; }, { passive: true });
 
 function parallaxLoop() {
-    if (!tabHides() && parallaxDirty) {
+    if (!isCoarsePointer() && !tabHides() && parallaxDirty) {
         parallaxDirty = false;
         const y = window.scrollY;
         if (y !== lastY) {
@@ -240,7 +255,9 @@ function parallaxLoop() {
     }
     requestAnimationFrame(parallaxLoop);
 }
-requestAnimationFrame(parallaxLoop);
+// Parallax only on precise (mouse) pointers — on touch it's another
+// moving layer behind the dock, which adds to the "roaming" feel.
+if (!isCoarsePointer()) requestAnimationFrame(parallaxLoop);
 
 // Spotlight Hover Effect
 document.querySelectorAll('.spotlight-wrapper, .glass-card:not(.project-card), .project-card').forEach(wrapper => {
