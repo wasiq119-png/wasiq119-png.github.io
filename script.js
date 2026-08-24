@@ -140,7 +140,7 @@ class Particle {
         }
     }
     draw() {
-        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx.fillStyle = `rgba(6, 182, 212, ${this.opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -155,7 +155,26 @@ function initParticles() {
     }
 }
 
+let lastFrameTime = 0;
+const FRAME_INTERVAL_MS = 1000 / 60;
+
 function animate() {
+    // Freeze heavy rendering while the tab is hidden to save battery/GPU.
+    if (document.visibilityState === 'hidden') {
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animate);
+        return;
+    }
+
+    // Cap the render rate so we never exceed ~60fps even when visible.
+    const now = performance.now();
+    const elapsed = now - lastFrameTime;
+    if (elapsed < FRAME_INTERVAL_MS) {
+        requestAnimationFrame(animate);
+        return;
+    }
+    lastFrameTime = now;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
         p.update();

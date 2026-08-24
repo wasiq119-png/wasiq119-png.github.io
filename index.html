@@ -4,17 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wasiq Mudasar | Frontend Developer</title>
-    <meta name="description" content="Portfolio of Wasiq Mudasar, Angular Frontend Developer and Full Stack Engineer.">
+    <title>Wasiq Mudasar | Angular Frontend & Full Stack Engineer</title>
+    <meta name="description" content="Portfolio of Wasiq Mudasar, Angular Frontend Developer and Full Stack Engineer specializing in modern scalable web applications and resilient backend APIs.">
+    <link rel="canonical" href="https://wasiq119-png.github.io/">
+
+    <!-- Open Graph / Social Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wasiq119-png.github.io/">
+    <meta property="og:title" content="Wasiq Mudasar | Angular Frontend & Full Stack Engineer">
+    <meta property="og:description" content="Portfolio of Wasiq Mudasar, Angular Frontend Developer and Full Stack Engineer specializing in modern scalable web applications.">
+    <meta property="og:image" content="https://wasiq119-png.github.io/assets/images/wasiq.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wasiq Mudasar | Angular Frontend & Full Stack Engineer">
+    <meta name="twitter:description" content="Portfolio of Wasiq Mudasar, Angular Frontend Developer and Full Stack Engineer specializing in modern scalable web applications.">
+    <meta name="twitter:image" content="https://wasiq119-png.github.io/assets/images/wasiq.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jura:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured JSON-LD Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://wasiq119-png.github.io/#person",
+          "name": "Wasiq Mudasar",
+          "url": "https://wasiq119-png.github.io/",
+          "jobTitle": "Angular Frontend & Full Stack Engineer",
+          "sameAs": [
+            "https://github.com/wasiq119-png",
+            "https://linkedin.com/in/wasiq-mudasar"
+          ],
+          "knowsAbout": ["Angular", "TypeScript", "React", "Node.js", "Java", "Python", "Full Stack Development", "Web Engineering"]
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://wasiq119-png.github.io/#webpage",
+          "url": "https://wasiq119-png.github.io/",
+          "name": "Wasiq Mudasar | Angular Frontend & Full Stack Engineer",
+          "isPartOf": {
+            "@type": "WebSite",
+            "@id": "https://wasiq119-png.github.io/#website",
+            "url": "https://wasiq119-png.github.io/",
+            "name": "Wasiq Mudasar Portfolio"
+          },
+          "about": {
+            "@id": "https://wasiq119-png.github.io/#person"
+          }
+        }
+      ]
+    }
+    </script>
+
 </head>
 
 <body>
@@ -42,8 +93,7 @@
             <div class="hero-left hidden show">
                 <h1 class="hero-title">
                     Wasiq <span class="gradient-text">Mudasar</span><br>
-                    <span class="gradient-text type-wrap" style="font-size: 2rem;"></span><span class="cursor"
-                        style="font-size: 2rem;">|</span> <br>
+                    <span class="gradient-text type-wrap hero-title-dynamic-size"></span><span class="cursor">|</span> <br>
                     Angular Frontend &<br>
                     Full Stack Engineer
                 </h1>
@@ -52,14 +102,14 @@
                     <a href="#contact" class="btn btn-primary">Get in touch</a>
                     <a href="#experience" class="btn btn-secondary">View experience</a>
                     <a href="https://docs.google.com/document/d/1tdH16JalBX9apSRxDnxiycc6AcQsI7KT/edit?usp=sharing&ouid=114766133105480275042&rtpof=true&sd=true"
-                        target="_blank" class="btn btn-outline">View CV</a>
+                        target="_blank" class="btn btn-outline" rel="noopener">View CV</a>
                 </div>
 
                 <div class="social-links">
-                    <a href="https://github.com/wasiq119-png" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank"><i
+                    <a href="https://github.com/wasiq119-png" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" rel="noopener" aria-label="LinkedIn"><i
                             class="fa-brands fa-linkedin"></i></a>
-                    <a href="mailto:wasiq119@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                    <a href="mailto:wasiq119@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -68,7 +118,7 @@
                     <div class="profile-glow"></div>
                     <!-- Note: Save your profile picture as "wasiq.jpg" inside "assets/images/" to show it here. -->
                     <img src="assets/images/wasiq.jpg"
-                        onerror="this.src='https://ui-avatars.com/api/?name=Wasiq+Mudasar&size=400&background=0D1117&color=A855F7'"
+                        onerror="this.src='https://ui-avatars.com/api/?name=Wasiq+Mudasar&size=400&background=0D1117&color=4F46E5'"
                         alt="Wasiq Mudasar" class="profile-img">
                 </div>
             </div>
@@ -80,7 +130,7 @@
             <div class="about-grid">
                 <div class="about-bio glass-card">
                     <h3>Hello! I'm Wasiq Mudasar</h3>
-                    <p style="text-align: justify; line-height: 1.8;">An <strong>Angular & React</strong> focused Frontend Developer and <strong>Full-Stack Engineer</strong> with a solid Computer Science background, currently specializing in <strong>Research in Computer & Systems Engineering</strong> at Technische Universität Ilmenau, Germany. I thrive on building high-performance, scalable web applications using TypeScript, Java Spring Boot, and Python, while maintaining a strong record of agility and on-time delivery in diverse global team environments.</p>
+                    <p class="text-justify">An <strong>Angular & React</strong> focused Frontend Developer and <strong>Full-Stack Engineer</strong> with a solid Computer Science background, currently specializing in <strong>Research in Computer & Systems Engineering</strong> at Technische Universität Ilmenau, Germany. I thrive on building high-performance, scalable web applications using TypeScript, Java Spring Boot, and Python, while maintaining a strong record of agility and on-time delivery in diverse global team environments.</p>
                 </div>
 
                 <div class="about-languages glass-card">
@@ -100,12 +150,11 @@
                 <div class="glass-card exp-card">
                     <div class="exp-header">
                         <h4>Full Stack Java Developer <br><span
-                                style="font-size:0.9rem;font-weight:400;color:var(--text-muted)">Inseyab Consulting &
+                                class="exp-org">Inseyab Consulting &
                                 Info Solutions, Pakistan</span></h4>
                         <span class="exp-date">Feb 2023 - Sep 2023</span>
                     </div>
-                    <ul class="text-muted mt-2"
-                        style="list-style-position: outside; margin-top: 1rem; margin-left:1.5rem; display: flex; flex-direction: column; gap: 0.5rem; padding-left: 0.5rem;">
+                    <ul class="exp-list text-muted">
                         <li><strong>Frontend Integration:</strong> Built and integrated REST APIs connecting TypeScript
                             frontends and Angular Material UI components.</li>
                         <li><strong>System Stability:</strong> Identified and resolved bugs in the legacy codebase,
@@ -117,12 +166,11 @@
                 <div class="glass-card exp-card">
                     <div class="exp-header">
                         <h4>Mobile Application Developer Intern <br><span
-                                style="font-size:0.9rem;font-weight:400;color:var(--text-muted)">Techvein,
+                                class="exp-org">Techvein,
                                 Pakistan</span></h4>
                         <span class="exp-date">Jun 2022 - Sep 2022</span>
                     </div>
-                    <ul class="text-muted mt-2"
-                        style="list-style-position: outside; margin-top: 1rem; margin-left:1.5rem; display: flex; flex-direction: column; gap: 0.5rem; padding-left: 0.5rem;">
+                    <ul class="exp-list text-muted">
                         <li>Maintained 100% attendance and collaborated daily with team members.</li>
                     </ul>
                 </div>
@@ -132,48 +180,48 @@
         <!-- Education Section -->
         <section id="education" class="section hidden">
             <h2 class="section-title text-center">Education & Certifications</h2>
-            <p class="text-center text-muted mb-20" style="max-width: 600px; margin-left: auto; margin-right: auto;">My academic journey and professional background that have shaped my technical expertise.</p>
+            <p class="text-center text-muted mb-20 mx-auto">My academic journey and professional background that have shaped my technical expertise.</p>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 4rem;">
+            <div class="edu-grid">
                 <!-- Academic Education -->
                 <div>
-                    <h3 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; font-size: 1.5rem; font-family: var(--font-body);"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-1);"></i> Academic Education</h3>
-                    <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <h3 class="icon-heading"><i class="fa-solid fa-graduation-cap tx-accent-1"></i> Academic Education</h3>
+                    <div class="stack-col">
                         <!-- Education Card 1 -->
                         <div class="spotlight-wrapper">
                             <div class="spotlight-card">
-                                <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 1.5rem; position:relative; z-index: 5;">
-                                    <div style="width: 45px; height: 45px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px;">
-                                        <img src="https://ui-avatars.com/api/?name=TU&size=100&background=10b981&color=fff" alt="TU Ilmenau" style="width:100%; height:100%; border-radius:10px;">
+                                <div class="card-head-row">
+                                    <div class="icon-avatar">
+                                        <img src="https://ui-avatars.com/api/?name=TU&size=100&background=10b981&color=fff" alt="TU Ilmenau">
                                     </div>
                                     <div>
-                                        <h3 style="font-size: 1.1rem; margin: 0;">Research in Computer & Systems Engineering</h3>
-                                        <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Technische Universität Ilmenau</p>
+                                        <h3 class="card-title">Research in Computer & Systems Engineering</h3>
+                                        <p class="text-muted card-subtitle">Technische Universität Ilmenau</p>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 1rem; position:relative; z-index: 5;">
+                                <div class="meta-line">
                                     <span><i class="fa-solid fa-location-dot"></i> Ilmenau, Germany</span> | <span><i class="fa-regular fa-calendar"></i> April 2024 - Present</span>
                                 </div>
-                                <p style="color: #a1a1aa; font-size: 0.9rem; position:relative; z-index: 5; line-height: 1.5;">Focusing on advanced topics in systems engineering, AI, and scalable software architecture to build next-generation enterprise solutions.</p>
+                                <p class="meta-desc">Focusing on advanced topics in systems engineering, AI, and scalable software architecture to build next-generation enterprise solutions.</p>
                             </div>
                         </div>
 
                         <!-- Education Card 2 -->
                         <div class="spotlight-wrapper">
                             <div class="spotlight-card">
-                                <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 1.5rem; position:relative; z-index: 5;">
-                                    <div style="width: 45px; height: 45px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px;">
-                                        <img src="https://ui-avatars.com/api/?name=IQ&size=100&background=3b82f6&color=fff" alt="IQRA" style="width:100%; height:100%; border-radius:10px;">
+                                <div class="card-head-row">
+                                    <div class="icon-avatar">
+                                        <img src="https://ui-avatars.com/api/?name=IQ&size=100&background=3b82f6&color=fff" alt="IQRA">
                                     </div>
                                     <div>
-                                        <h3 style="font-size: 1.1rem; margin: 0;">Bachelor of Science in Computer Science</h3>
-                                        <p class="text-muted" style="margin: 0; font-size: 0.9rem;">IQRA University</p>
+                                        <h3 class="card-title">Bachelor of Science in Computer Science</h3>
+                                        <p class="text-muted card-subtitle">IQRA University</p>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 1rem; position:relative; z-index: 5;">
+                                <div class="meta-line">
                                     <span><i class="fa-solid fa-location-dot"></i> Pakistan</span> | <span><i class="fa-regular fa-calendar"></i> Jan 2018 - Aug 2022</span>
                                 </div>
-                                <p style="color: #a1a1aa; font-size: 0.9rem; position:relative; z-index: 5; line-height: 1.5;">Successfully completed core CS curriculum with excellence, establishing a robust foundation in high-level algorithms and software engineering patterns.</p>
+                                <p class="meta-desc">Successfully completed core CS curriculum with excellence, establishing a robust foundation in high-level algorithms and software engineering patterns.</p>
                             </div>
                         </div>
                     </div>
@@ -181,49 +229,49 @@
 
                 <!-- Professional Certifications -->
                 <div>
-                    <h3 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; font-size: 1.5rem; font-family: var(--font-body);"><i class="fa-solid fa-certificate" style="color: var(--accent-2);"></i> Professional Certifications</h3>
-                    <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <h3 class="icon-heading"><i class="fa-solid fa-certificate tx-accent-2"></i> Professional Certifications</h3>
+                    <div class="stack-col">
                         <!-- Cert Card 1 -->
-                        <div class="spotlight-wrapper" onclick="openModal('inseyab-modal')" style="cursor: pointer;">
+                        <div class="spotlight-wrapper reveal-card" onclick="openModal('inseyab-modal')">
                             <div class="spotlight-card">
-                                <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 1.5rem; position:relative; z-index: 5;">
-                                    <div style="width: 45px; height: 45px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px;">
-                                        <img src="https://ui-avatars.com/api/?name=IN&size=100&background=A855F7&color=fff" alt="Inseyab" style="width:100%; height:100%; border-radius:10px;">
+                                <div class="card-head-row">
+                                    <div class="icon-avatar">
+                                        <img src="https://ui-avatars.com/api/?name=IN&size=100&background=4F46E5&color=fff" alt="Inseyab">
                                     </div>
                                     <div>
-                                        <div style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
-                                            <h3 style="font-size: 1.1rem; margin: 0;">Intern Java Developer Certification</h3>
-                                            <i class="fa-solid fa-expand" style="font-size: 0.8rem; color: var(--accent-2); opacity: 0.6;"></i>
+                                        <div class="card-top-row">
+                                            <h3 class="card-title">Intern Java Developer Certification</h3>
+                                            <i class="fa-solid fa-expand expand-hint tx-accent-2"></i>
                                         </div>
-                                        <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Inseyab Consulting & Info Solutions</p>
+                                        <p class="text-muted card-subtitle">Inseyab Consulting & Info Solutions</p>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 1rem; position:relative; z-index: 5;">
+                                <div class="meta-line">
                                     <span><i class="fa-solid fa-award"></i> Achievement Record</span> | <span><i class="fa-regular fa-calendar"></i> July 2023</span>
                                 </div>
-                                <p style="color: #a1a1aa; font-size: 0.9rem; position:relative; z-index: 5; line-height: 1.5;">Awarded for excellence in Java development, recognizing key contributions to REST API integration and the successful stabilization of enterprise-level legacy systems. <span style="text-decoration: underline; font-size: 0.8rem; display: block; margin-top: 0.5rem; color: var(--accent-2);">Click to view certificate</span></p>
+                                <p class="meta-desc">Awarded for excellence in Java development, recognizing key contributions to REST API integration and the successful stabilization of enterprise-level legacy systems. <span class="link-hint tx-accent-2">Click to view certificate</span></p>
                             </div>
                         </div>
 
                         <!-- Cert Card 2 -->
-                        <div class="spotlight-wrapper" onclick="openModal('techvein-modal')" style="cursor: pointer;">
+                        <div class="spotlight-wrapper reveal-card" onclick="openModal('techvein-modal')">
                             <div class="spotlight-card">
-                                <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 1.5rem; position:relative; z-index: 5;">
-                                    <div style="width: 45px; height: 45px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px;">
-                                        <img src="https://ui-avatars.com/api/?name=TV&size=100&background=EC4899&color=fff" alt="Techvein" style="width:100%; height:100%; border-radius:10px;">
+                                <div class="card-head-row">
+                                    <div class="icon-avatar">
+                                        <img src="https://ui-avatars.com/api/?name=TV&size=100&background=06B6D4&color=fff" alt="Techvein">
                                     </div>
                                     <div>
-                                        <div style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
-                                            <h3 style="font-size: 1.1rem; margin: 0;">Development Internship Completion</h3>
-                                            <i class="fa-solid fa-expand" style="font-size: 0.8rem; color: var(--accent-3); opacity: 0.6;"></i>
+                                        <div class="card-top-row">
+                                            <h3 class="card-title">Development Internship Completion</h3>
+                                            <i class="fa-solid fa-expand expand-hint tx-accent-3"></i>
                                         </div>
-                                        <p class="text-muted" style="margin: 0; font-size: 0.9rem;">Techvein IT Solutions</p>
+                                        <p class="text-muted card-subtitle">Techvein IT Solutions</p>
                                     </div>
                                 </div>
-                                <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 1rem; position:relative; z-index: 5;">
+                                <div class="meta-line">
                                     <span><i class="fa-solid fa-award"></i> Professional Validation</span> | <span><i class="fa-regular fa-calendar"></i> Sept 2022</span>
                                 </div>
-                                <p style="color: #a1a1aa; font-size: 0.9rem; position:relative; z-index: 5; line-height: 1.5;">Recognized for reliable task delivery and strong collaborative spirit in the development department, with a primary focus on on-time project execution and team coordination. <span style="text-decoration: underline; font-size: 0.8rem; display: block; margin-top: 0.5rem; color: var(--accent-3);">Click to view certificate</span></p>
+                                <p class="meta-desc">Recognized for reliable task delivery and strong collaborative spirit in the development department, with a primary focus on on-time project execution and team coordination. <span class="link-hint tx-accent-3">Click to view certificate</span></p>
                             </div>
                         </div>
                     </div>
@@ -236,145 +284,123 @@
             <h2 class="section-title text-center">Skills & Expertise</h2>
             <p class="text-center text-muted mb-4">A comprehensive overview of my technical skills</p>
             <div class="skills-grid">
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-angular" style="color:#dd1b16;"></i> Angular</div>
-                <div class="skill-item glass-card hidden" style="font-size: 1.5rem; opacity: 0.9;">TS<br><span style="font-size: 1rem;">TypeScript</span></div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-react" style="color:#61dbfb;"></i> React</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-js" style="color:#f7df1e;"></i> JavaScript</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-python" style="color:#3776ab;"></i> Python</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-java" style="color:#5382a1;"></i> Java Spring</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-node-js" style="color:#68a063;"></i> Node.js</div>
-                <div class="skill-item glass-card hidden"><i class="fa-solid fa-server" style="color:#026e00;"></i> REST APIs</div>
-                <div class="skill-item glass-card hidden"><i class="fa-solid fa-database" style="color:#336791;"></i> PostgreSQL</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-html5" style="color:#e34f26;"></i> HTML/SCSS</div>
-                <div class="skill-item glass-card hidden"><i class="fa-brands fa-git-alt" style="color:#f34f29;"></i> Git</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-angular skill-brand-angle"></i> Angular</div>
+                <div class="skill-item glass-card hidden skill-plain">TS<br><span class="skill-plain-sub">TypeScript</span></div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-react skill-brand-react"></i> React</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-js skill-brand-js"></i> JavaScript</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-python skill-brand-python"></i> Python</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-java skill-brand-java"></i> Java Spring</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-node-js skill-brand-node"></i> Node.js</div>
+                <div class="skill-item glass-card hidden"><i class="fa-solid fa-server skill-brand-server"></i> REST APIs</div>
+                <div class="skill-item glass-card hidden"><i class="fa-solid fa-database skill-brand-db"></i> PostgreSQL</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-html5 skill-brand-html"></i> HTML/SCSS</div>
+                <div class="skill-item glass-card hidden"><i class="fa-brands fa-git-alt skill-brand-git"></i> Git</div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="section hidden">
             <h2 class="section-title text-center">Personal Projects</h2>
-            <p class="text-center text-muted mb-4" style="max-width: 600px; margin: 0 auto 3rem auto;">Explore some of my side projects and interesting things I've built outside of work.</p>
+            <p class="text-center text-muted mb-4 section-lead">Explore some of my side projects and interesting things I've built outside of work.</p>
 
-            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;">
-                <button class="btn btn-secondary filter-btn active" data-filter="all" style="border-radius: 8px; padding: 0.6rem 1.2rem; background: transparent;">All Projects</button>
-                <button class="btn btn-outline filter-btn" data-filter="ai" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">AI & Machine Learning</button>
-                <button class="btn btn-outline filter-btn" data-filter="backend" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">Backend & APIs</button>
-                <button class="btn btn-outline filter-btn" data-filter="fullstack" style="border-radius: 8px; padding: 0.6rem 1.2rem; border-color: transparent;">Full Stack</button>
+            <div class="filters-row">
+                <button class="btn btn-secondary filter-btn active" data-filter="all">All Projects</button>
+                <button class="btn btn-outline filter-btn" data-filter="ai">AI & Machine Learning</button>
+                <button class="btn btn-outline filter-btn" data-filter="backend">Backend & APIs</button>
+                <button class="btn btn-outline filter-btn" data-filter="fullstack">Full Stack</button>
             </div>
 
-            <div style="position: relative; width: 100%; max-width: 1000px; margin: 0 auto; display: flex; align-items: center;">
+            <div class="projects-viewport">
                 
-                <button onclick="document.getElementById('projects-scroller').scrollBy({left:-400, behavior:'smooth'})" class="glass-card hide-on-mobile" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-right: 15px; flex-shrink: 0; z-index: 5;">
-                    <i class="fa-solid fa-chevron-left" style="color: white; font-size: 1.2rem;"></i>
+                <button onclick="document.getElementById('projects-scroller').scrollBy({left:-400, behavior:'smooth'})" class="scroller-btn scroller-prev hide-on-mobile">
+                    <i class="fa-solid fa-chevron-left"></i>
                 </button>
 
-                <div id="projects-scroller" style="display: flex; gap: 2rem; overflow-x: auto; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 1rem; scrollbar-width: none; -ms-overflow-style: none; flex-grow: 1;">
-                    <style>
-                        #projects-scroller::-webkit-scrollbar { display: none; }
-                        .project-card {
-                            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-                        }
-                        .project-card:hover {
-                            transform: translateY(-8px) scale(1.02);
-                            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.2);
-                        }
-                        @media (max-width: 600px) {
-                            .project-card:hover {
-                                transform: none !important;
-                                box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-                            }
-                        }
-                        .project-img {
-                            transition: filter 0.6s ease;
-                        }
-                        .project-card:hover .project-img {
-                            filter: brightness(1.1);
-                        }
-                    </style>
+                <div id="projects-scroller" class="projects-scroller">
                     <!-- DataOps Framework Card -->
-                    <div class="project-card glass-card" data-category="backend" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('dataops-modal')">
-                        <div class="project-img" style="height: 480px; margin-bottom: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 2rem; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 40%, transparent 100%), url('assets/images/Microservices_app.png') center/cover no-repeat; position: relative; border-radius: inherit;">
-                            <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; position: relative; z-index: 2; color: white;">Backend & APIs</span>
-                            <h3 style="font-size: 2.2rem; margin-bottom: 1rem; position: relative; z-index: 2; color: white;">DataOps Framework</h3>
+                    <div class="project-card glass-card project-shell" data-category="backend" onclick="openModal('dataops-modal')">
+                        <div class="project-img project-cover cover-dataops">
+                            <span class="cover-kicker">Backend & APIs</span>
+                            <h3>DataOps Framework</h3>
                         </div>
                     </div>
 
                     <!-- Neuro Tracker Card -->
-                    <div class="project-card glass-card" data-category="ai" style="padding: 0; cursor: pointer; width: 450px; min-width: min(85vw, 400px); flex: 0 0 auto; scroll-snap-align: center; position: relative;" onclick="openModal('neuro-modal')">
-                        <div class="project-img" style="height: 480px; margin-bottom: 0; display: flex; flex-direction: column; justify-content: flex-start; padding: 2rem; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 20%, #4a90e2 100%); position: relative; border-radius: inherit;">
-                            <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; position: relative; z-index: 2; color: white;">Healthcare App</span>
-                            <h3 style="font-size: 2.2rem; margin-bottom: 1rem; position: relative; z-index: 2; color: white;">Neuro Tracker</h3>
+                    <div class="project-card glass-card project-shell" data-category="ai" onclick="openModal('neuro-modal')">
+                        <div class="project-img project-cover cover-neuro">
+                            <span class="cover-kicker">Healthcare App</span>
+                            <h3>Neuro Tracker</h3>
                             
-                            <div style="position: absolute; bottom: 20%; left: 10%; right: 10%; height: 180px; border: 2px solid rgba(255,255,255,0.2); background: rgba(59, 130, 246, 0.1); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; color: white; font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; flex-direction: column; border-radius: 12px;">
-                                <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; margin-bottom: 1rem; color: #ec4899;"></i>
+                            <div class="neuro-demo-window">
+                                <i class="fa-solid fa-heart-pulse"></i>
                                 Diagnostic Engine
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="document.getElementById('projects-scroller').scrollBy({left:400, behavior:'smooth'})" class="glass-card hide-on-mobile" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); margin-left: 15px; flex-shrink: 0; z-index: 5;">
-                    <i class="fa-solid fa-chevron-right" style="color: white; font-size: 1.2rem;"></i>
+                <button onclick="document.getElementById('projects-scroller').scrollBy({left:400, behavior:'smooth'})" class="scroller-btn scroller-next hide-on-mobile">
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
         </section>
 
         <!-- DataOps Modal Structure -->
-        <div id="dataops-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
-            <div class="glass-card modal-content" style="width: 100%; max-width: 900px; margin: auto; position: relative; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
-                <button onclick="closeModal('dataops-modal')" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.9); border: none; color: black; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-xmark"></i></button>
+        <div id="dataops-modal" class="modal-overlay project-modal-overlay">
+            <div class="glass-card modal-content project-modal-panel">
+                <button onclick="closeModal('dataops-modal')" class="project-modal-close"><i class="fa-solid fa-xmark"></i></button>
                 
-                <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">Backend & APIs</span>
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">DataOps Framework</h2>
+                <span class="modal-kicker">Backend & APIs</span>
+                <h2 class="modal-title">DataOps Framework</h2>
 
-                <div style="width: 100%; height: 280px; background: linear-gradient(180deg, #f0f0f0, #c0c0c0); border-radius: 12px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; color: black; font-family: monospace; border: 1px solid #999; position: relative; overflow: hidden;">
-                    <div style="border: 2px solid #444; width: 60%; height: 60%; display: flex; align-items: center; justify-content: center; position: relative;">
+                <div class="diagram-figure">
+                    <div class="diagram-ui">
                         UI Microservice
                         <!-- Exact diagram replication from screenshot -->
-                        <div style="position: absolute; top: -40px; left: 50%; width: 2px; height: 40px; background: #444;"><div style="position:absolute; bottom:-5px; left:-4px; border-left:5px solid transparent; border-right:5px solid transparent; border-top:8px solid #444;"></div></div>
-                        <div style="position: absolute; bottom: -40px; left: 0; width: 2px; height: 40px; background: #444;"><div style="position:absolute; top:-5px; left:-4px; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:8px solid #444;"></div></div>
+                        <div class="diagram-line-top"><div class="diagram-arrow-up"></div></div>
+                        <div class="diagram-line-bottom"><div class="diagram-arrow-down"></div></div>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="modal-content-grid">
                     <div>
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bullseye" style="color: #3b82f6;"></i> Project Overview</h4>
-                        <p class="text-muted" style="margin-bottom: 2rem; font-size: 0.95rem;">Enterprise-grade microservices framework designed for data-intensive applications. Includes service mesh capabilities, automated scaling, comprehensive monitoring, and seamless integration with cloud platforms.</p>
+                        <h4 class="project-section-title"><i class="fa-solid fa-bullseye tx-accent-2"></i> Project Overview</h4>
+                        <p class="text-muted modal-desc">Enterprise-grade microservices framework designed for data-intensive applications. Includes service mesh capabilities, automated scaling, comprehensive monitoring, and seamless integration with cloud platforms.</p>
                         
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> Key Features</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Auto-scaling microservices architecture</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Integrated service discovery and load balancing</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Real-time monitoring and alerting</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Cloud-native deployment patterns</div>
+                        <h4 class="project-section-title"><i class="fa-solid fa-bolt tx-amber"></i> Key Features</h4>
+                        <div class="feature-grid">
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Auto-scaling microservices architecture</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Integrated service discovery and load balancing</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Real-time monitoring and alerting</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Cloud-native deployment patterns</div>
                         </div>
 
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-code" style="color: #a855f7;"></i> Technology Stack</h4>
-                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">TS</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Node.js</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Docker</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Sequelize</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Kubernetes</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">AWS</span>
+                        <h4 class="project-section-title"><i class="fa-solid fa-code tx-accent-2"></i> Technology Stack</h4>
+                        <div class="tech-stack-tags">
+                            <span class="tech-tag">TS</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Sequelize</span>
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">AWS</span>
                         </div>
                     </div>
                     
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Project Category</h5>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #a855f7); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; display: inline-block;">Backend & APIs</span>
+                    <div class="info-stack">
+                        <div class="project-info-card">
+                            <h5>Project Category</h5>
+                            <span class="tech-tag category-chip">Backend & APIs</span>
                         </div>
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Development Status</h5>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;"><span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span> Completed</div>
+                        <div class="project-info-card">
+                            <h5>Development Status</h5>
+                            <div class="status-row"><span class="project-status-indicator completed"></span> Completed</div>
                         </div>
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Tech Highlights</h5>
-                            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem;">
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> TS</li>
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> Node.js</li>
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> Docker</li>
+                        <div class="project-info-card">
+                            <h5>Tech Highlights</h5>
+                            <ul class="project-highlights">
+                                <li><span class="project-highlights-bullet">&bull;</span> TS</li>
+                                <li><span class="project-highlights-bullet">&bull;</span> Node.js</li>
+                                <li><span class="project-highlights-bullet">&bull;</span> Docker</li>
                             </ul>
                         </div>
                     </div>
@@ -383,57 +409,57 @@
         </div>
 
         <!-- Neuro Tracker Modal Structure -->
-        <div id="neuro-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 1rem; overflow-y: auto;">
-            <div class="glass-card modal-content" style="width: 100%; max-width: 900px; margin: auto; position: relative; background: #16161a; box-shadow: 0 20px 60px rgba(0,0,0,0.8);">
-                <button onclick="closeModal('neuro-modal')" style="position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.9); border: none; color: black; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-xmark"></i></button>
+        <div id="neuro-modal" class="modal-overlay project-modal-overlay">
+            <div class="glass-card modal-content project-modal-panel">
+                <button onclick="closeModal('neuro-modal')" class="project-modal-close"><i class="fa-solid fa-xmark"></i></button>
                 
-                <span style="font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; display: block;">Mobile App & Healthcare</span>
-                <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Neuro Tracker</h2>
+                <span class="modal-kicker">Mobile App & Healthcare</span>
+                <h2 class="modal-title">Neuro Tracker</h2>
 
-                <div style="width: 100%; height: 280px; background: linear-gradient(180deg, #e0f7fa, #b2ebf2); border-radius: 12px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; color: #006064; font-family: monospace; border: 1px solid #4dd0e1; position: relative; overflow: hidden; flex-direction: column;">
-                    <i class="fa-solid fa-heart-pulse" style="font-size: 4rem; margin-bottom: 1rem;"></i>
-                    <div style="border: 2px solid #00838f; padding: 1rem 2rem; background: rgba(255,255,255,0.5);">
+                <div class="neuro-figure">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <div class="neuro-consent-box">
                         Guillain-Barré Diagnostic Logic
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="modal-content-grid">
                     <div>
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bullseye" style="color: #3b82f6;"></i> Project Overview</h4>
-                        <p class="text-muted" style="margin-bottom: 2rem; font-size: 0.95rem;">A specialized healthcare application built to assist in the early screening of Guillain-Barré Syndrome symptoms, specifically targeting under-served rural regions. The app seamlessly connects remote patients with registered medical professionals for rapid diagnosis.</p>
+                        <h4 class="project-section-title"><i class="fa-solid fa-bullseye tx-accent-2"></i> Project Overview</h4>
+                        <p class="text-muted modal-desc">A specialized healthcare application built to assist in the early screening of Guillain-Barré Syndrome symptoms, specifically targeting under-served rural regions. The app seamlessly connects remote patients with registered medical professionals for rapid diagnosis.</p>
                         
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-bolt" style="color: #f59e0b;"></i> Key Features</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Logic-based symptom algorithm</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Doctor-patient communication</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Offline rural capability via SQLite</div>
-                            <div style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: flex; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: #10b981; margin-top: 3px;"></i> Responsive Android UI via XML</div>
+                        <h4 class="project-section-title"><i class="fa-solid fa-bolt tx-amber"></i> Key Features</h4>
+                        <div class="feature-grid">
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Logic-based symptom algorithm</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Doctor-patient communication</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Offline rural capability via SQLite</div>
+                            <div class="feature-card"><i class="fa-solid fa-check"></i> Responsive Android UI via XML</div>
                         </div>
 
-                        <h4 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;"><i class="fa-solid fa-code" style="color: #a855f7;"></i> Technology Stack</h4>
-                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Java</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">Android SDK</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">SQLite</span>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #ec4899); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">XML Layouts</span>
+                        <h4 class="project-section-title"><i class="fa-solid fa-code tx-accent-2"></i> Technology Stack</h4>
+                        <div class="tech-stack-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Android SDK</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">XML Layouts</span>
                         </div>
                     </div>
                     
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Project Category</h5>
-                            <span style="background: linear-gradient(90deg, #8b5cf6, #a855f7); padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; display: inline-block;">Healthcare App</span>
+                    <div class="info-stack">
+                        <div class="project-info-card">
+                            <h5>Project Category</h5>
+                            <span class="tech-tag category-chip">Healthcare App</span>
                         </div>
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Development Status</h5>
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;"><span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span> Completed</div>
+                        <div class="project-info-card">
+                            <h5>Development Status</h5>
+                            <div class="status-row"><span class="project-status-indicator completed"></span> Completed</div>
                         </div>
-                        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
-                            <h5 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Tech Highlights</h5>
-                            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem;">
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> Java SDK</li>
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> Offline Database</li>
-                                <li><span style="color: #3b82f6; margin-right: 0.5rem; font-size: 1.2rem; line-height: 0;">&bull;</span> Low-latency</li>
+                        <div class="project-info-card">
+                            <h5>Tech Highlights</h5>
+                            <ul class="project-highlights">
+                                <li><span class="project-highlights-bullet">&bull;</span> Java SDK</li>
+                                <li><span class="project-highlights-bullet">&bull;</span> Offline Database</li>
+                                <li><span class="project-highlights-bullet">&bull;</span> Low-latency</li>
                             </ul>
                         </div>
                     </div>
@@ -442,17 +468,17 @@
         </div>
 
         <!-- Certificate Modals -->
-        <div id="inseyab-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 2rem; overflow: hidden;">
-            <div class="modal-content" style="width: auto; height: auto; max-width: 95vw; max-height: 95vh; position: relative; padding: 0; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center;">
-                <button onclick="closeModal('inseyab-modal')" style="position: absolute; top: -1rem; right: -1rem; background: var(--accent-2); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"><i class="fa-solid fa-xmark"></i></button>
-                <img src="assets/images/Inseyab%20Certification_page-0001.jpg" alt="Inseyab Certificate" style="max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); object-fit: contain;">
+        <div id="inseyab-modal" class="modal-overlay cert-modal-overlay">
+            <div class="modal-content modal-content-custom">
+                <button onclick="closeModal('inseyab-modal')" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <img src="assets/images/Inseyab%20Certification_page-0001.jpg" alt="Inseyab Certificate" class="modal-image">
             </div>
         </div>
 
-        <div id="techvein-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); z-index: 9999; justify-content: center; align-items: center; padding: 2rem; overflow: hidden;">
-            <div class="modal-content" style="width: auto; height: auto; max-width: 95vw; max-height: 95vh; position: relative; padding: 0; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center;">
-                <button onclick="closeModal('techvein-modal')" style="position: absolute; top: -1rem; right: -1rem; background: var(--accent-3); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"><i class="fa-solid fa-xmark"></i></button>
-                <img src="assets/images/TV%20x%20Internship%20Certificate_page-0001.jpg" alt="Techvein Certificate" style="max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); object-fit: contain;">
+        <div id="techvein-modal" class="modal-overlay cert-modal-overlay">
+            <div class="modal-content modal-content-custom">
+                <button onclick="closeModal('techvein-modal')" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <img src="assets/images/TV%20x%20Internship%20Certificate_page-0001.jpg" alt="Techvein Certificate" class="modal-image">
             </div>
         </div>
 
@@ -463,101 +489,81 @@
             <p class="text-center text-muted mb-4">Feel free to reach out for collaborations or just a friendly hello!
             </p>
 
-            <div class="contact-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.5rem; width: 100%; max-width: 800px;">
-                <a href="mailto:wasiq119@gmail.com" class="glass-card"
-                    style="text-align: left; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; gap: 1.2rem;">
-                    <div
-                        style="width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-regular fa-envelope" style="font-size: 1.2rem; color: var(--accent-1);"></i>
+            <div class="contact-grid">
+                <a href="mailto:wasiq119@gmail.com" class="glass-card detail-card">
+                    <div class="detail-icon-container">
+                        <i class="fa-regular fa-envelope detail-icon"></i>
                     </div>
-                    <div style="overflow: hidden;">
-                        <h4 style="margin-bottom: 0.2rem; color: var(--text-main); font-size: 1rem;">Email</h4>
-                        <p class="text-muted"
-                            style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <div class="detail-item-content">
+                        <h4 class="detail-label">Email</h4>
+                        <p class="text-muted detail-text">
                             wasiq119@gmail.com</p>
                     </div>
-                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('wasiq119@gmail.com', this)" class="copy-hint" title="Copy Email" style="margin-left: auto; cursor: pointer; opacity: 0.5; transition: all 0.3s; padding: 5px;"><i class="fa-regular fa-copy"></i></div>
+                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('wasiq119@gmail.com', this)" class="copy-hint" title="Copy Email"><i class="fa-regular fa-copy"></i></div>
                 </a>
 
-                <div class="glass-card"
-                    style="text-align: left; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem;">
-                    <div
-                        style="width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-location-dot" style="font-size: 1.2rem; color: var(--accent-2);"></i>
+                <div class="glass-card detail-card">
+                    <div class="detail-icon-container">
+                        <i class="fa-solid fa-location-dot detail-icon tx-accent-2"></i>
                     </div>
-                    <div style="overflow: hidden;">
-                        <h4 style="margin-bottom: 0.2rem; color: var(--text-main); font-size: 1rem;">Location</h4>
-                        <p class="text-muted"
-                            style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <div class="detail-item-content">
+                        <h4 class="detail-label">Location</h4>
+                        <p class="text-muted detail-text">
                             Ilmenau, Germany</p>
                     </div>
                 </div>
 
-                <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" class="glass-card"
-                    style="text-align: left; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; gap: 1.2rem;">
-                    <div
-                        style="width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-brands fa-linkedin" style="font-size: 1.2rem; color: var(--accent-1);"></i>
+                <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" class="glass-card detail-card">
+                    <div class="detail-icon-container">
+                        <i class="fa-brands fa-linkedin detail-icon"></i>
                     </div>
-                    <div style="overflow: hidden;">
-                        <h4 style="margin-bottom: 0.2rem; color: var(--text-main); font-size: 1rem;">LinkedIn</h4>
-                        <p class="text-muted"
-                            style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <div class="detail-item-content">
+                        <h4 class="detail-label">LinkedIn</h4>
+                        <p class="text-muted detail-text">
                             /in/wasiq-mudasar</p>
                     </div>
-                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('https://linkedin.com/in/wasiq-mudasar', this)" class="copy-hint" title="Copy LinkedIn Link" style="margin-left: auto; cursor: pointer; opacity: 0.5; transition: all 0.3s; padding: 5px;"><i class="fa-regular fa-copy"></i></div>
+                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('https://linkedin.com/in/wasiq-mudasar', this)" class="copy-hint" title="Copy LinkedIn Link"><i class="fa-regular fa-copy"></i></div>
                 </a>
 
-                <a href="https://github.com/wasiq119-png" target="_blank" class="glass-card"
-                    style="text-align: left; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; gap: 1.2rem;">
-                    <div
-                        style="width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-brands fa-github" style="font-size: 1.2rem; color: var(--accent-2);"></i>
+                <a href="https://github.com/wasiq119-png" target="_blank" class="glass-card detail-card">
+                    <div class="detail-icon-container">
+                        <i class="fa-brands fa-github detail-icon tx-accent-2"></i>
                     </div>
-                    <div style="overflow: hidden;">
-                        <h4 style="margin-bottom: 0.2rem; color: var(--text-main); font-size: 1rem;">GitHub</h4>
-                        <p class="text-muted"
-                            style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <div class="detail-item-content">
+                        <h4 class="detail-label">GitHub</h4>
+                        <p class="text-muted detail-text">
                             wasiq119-png</p>
                     </div>
-                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('https://github.com/wasiq119-png', this)" class="copy-hint" title="Copy GitHub Link" style="margin-left: auto; cursor: pointer; opacity: 0.5; transition: all 0.3s; padding: 5px;"><i class="fa-regular fa-copy"></i></div>
+                    <div onclick="event.preventDefault(); event.stopPropagation(); copyText('https://github.com/wasiq119-png', this)" class="copy-hint" title="Copy GitHub Link"><i class="fa-regular fa-copy"></i></div>
                 </a>
             </div>
 
-            <div class="glass-card"
-                style="margin-top: 1.5rem; text-align: left; width: 100%; max-width: 800px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
-                <h4 style="color: var(--text-main); font-size: 1rem;">Response Time</h4>
-                <span class="text-muted" style="font-size: 0.95rem;">I typically respond within 24-48 hours. For urgent
+            <div class="glass-card response-box">
+                <h4>Response Time</h4>
+                <span class="text-muted response-note">I typically respond within 24-48 hours. For urgent
                     matters, reach out on LinkedIn.</span>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer
-        style="width: 100%; border-top: 1px solid rgba(255,255,255,0.08); padding: 4rem 1rem 8rem 1rem; margin-top: 2rem;">
-        <div class="container"
-            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+    <footer class="site-footer">
+        <div class="container footer-inner">
             <div>
-                <h3 class="gradient-text"
-                    style="font-size: 1.4rem; margin-bottom: 0.2rem; font-family: var(--font-body); font-weight: 600;">
+                <h3 class="gradient-text footer-title">
                     Wasiq Mudasar</h3>
-                <p class="text-muted" style="font-size: 0.95rem;">Software Engineering Portfolio</p>
+                <p class="text-muted footer-subtitle">Software Engineering Portfolio</p>
             </div>
 
-            <a href="#hero" class="glass-card"
-                style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 50%;">
+            <a href="#hero" class="glass-card footer-to-top">
                 <i class="fa-solid fa-arrow-up text-muted"></i>
             </a>
         </div>
 
-        <div
-            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); max-width: 800px; margin-left: auto; margin-right: auto;">
-            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">© 2026 Wasiq Mudasar . All rights
+        <div class="footer-legal">
+            <p class="text-muted footer-line">© 2026 Wasiq Mudasar . All rights
                 reserved.</p>
-            <p class="text-muted" style="font-size: 0.85rem;">Built with <i class="fa-solid fa-heart"
-                    style="color: #ec4899;"></i> and modern web technologies</p>
+            <p class="text-muted footer-built">Built with <i class="fa-solid fa-heart"></i> and modern web technologies</p>
         </div>
     </footer>
 
