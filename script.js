@@ -1,318 +1,212 @@
-// Typing Animation
-const words = ["AI-Native Full-Stack Systems", "LLM Pipelines & Multi-Agent Flows", "Spring Boot · Next.js 16 · Groq", "Production Java & React Engineer"];
-let i = 0;
-let j = 0;
-let isDeleting = false;
-let currentWord = "";
-const el = document.querySelector(".type-wrap");
+/* ═══════════════════════════════════════════════════════
+   Portfolio — script.js
+   Claude-orange palette: rgba(217, 119, 87, opacity)
+═══════════════════════════════════════════════════════ */
 
-function type() {
-    if (!el) return;
+/* ── 1. TYPEWRITER ──────────────────────────────────── */
+(function initTypewriter() {
+  const el = document.getElementById('typewriter');
+  if (!el) return;
+  const lines = [
+    'AI Full-Stack Engineer',
+    'Multi-Agent Systems',
+    'LLM Pipeline Builder',
+    'Production Shipping'
+  ];
+  let li = 0, ci = 0, deleting = false;
 
-    currentWord = words[i];
-
-    if (isDeleting) {
-        el.textContent = currentWord.substring(0, j - 1);
-        j--;
+  function tick() {
+    const target = lines[li];
+    if (!deleting) {
+      el.textContent = target.slice(0, ++ci);
+      if (ci >= target.length) { deleting = true; setTimeout(tick, 2000); return; }
     } else {
-        el.textContent = currentWord.substring(0, j + 1);
-        j++;
+      el.textContent = target.slice(0, --ci);
+      if (ci === 0) { deleting = false; li = (li + 1) % lines.length; }
     }
+    setTimeout(tick, deleting ? 45 : 90);
+  }
+  setTimeout(tick, 600);
+})();
 
-    let typeSpeed = 100;
+/* ── 2. MOUSE PARALLAX (CSS vars) ───────────────────── */
+document.addEventListener('mousemove', function(e) {
+  const main = document.getElementById('main-content');
+  if (!main) return;
+  const rect = main.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top)  / rect.height) * 100;
+  document.documentElement.style.setProperty('--mouse-x', x + '%');
+  document.documentElement.style.setProperty('--mouse-y', y + '%');
+}, { passive: true });
 
-    if (isDeleting) {
-        typeSpeed /= 2;
-    }
-
-    if (!isDeleting && j === currentWord.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-    } else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % words.length;
-        typeSpeed = 500;
-    }
-
-    setTimeout(type, typeSpeed);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(type, 1000);
-});
-
-// Scroll Reveal
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            if (entry.target.classList.contains('skill-item')) {
-                // Staggered reveal for skills
-                const skills = Array.from(document.querySelectorAll('.skill-item'));
-                const skillIndex = skills.indexOf(entry.target);
-                setTimeout(() => {
-                    entry.target.classList.add('show');
-                }, skillIndex * 100);
-            } else {
-                entry.target.classList.add('show');
-            }
-        }
+/* ── 3. SCROLL PARALLAX ─────────────────────────────── */
+let lastScrollY = 0;
+let scrollRAF = false;
+window.addEventListener('scroll', function() {
+  lastScrollY = window.scrollY;
+  if (!scrollRAF) {
+    scrollRAF = true;
+    requestAnimationFrame(function() {
+      document.documentElement.style.setProperty('--scroll-y', lastScrollY + 'px');
+      scrollRAF = false;
     });
-}, observerOptions);
+  }
+}, { passive: true });
 
-document.querySelectorAll('.hidden').forEach((el) => {
-    observer.observe(el);
-});
-
-// Copy to Clipboard Feature
-function copyText(text, el) {
-    navigator.clipboard.writeText(text).then(() => {
-        const icon = el.querySelector('i');
-        const originalClass = icon.className;
-        
-        icon.className = 'fa-solid fa-check';
-        el.style.color = 'var(--accent-2)';
-        el.style.opacity = '1';
-
-        setTimeout(() => {
-            icon.className = originalClass;
-            el.style.color = '';
-            el.style.opacity = '0.5';
-        }, 1500);
+/* ── 4. SCROLL-REVEAL (IntersectionObserver) ─────────── */
+(function initReveal() {
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
     });
-}
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.hidden').forEach(function(el) { io.observe(el); });
+})();
 
-// Navigation Highlight
-const sections = document.querySelectorAll("section");
-const navItems = document.querySelectorAll(".nav-item");
+/* ── 5. NAV SPY (sidebar + mobile nav) ──────────────── */
+(function initNavSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  const mobileLinks  = document.querySelectorAll('.mobile-nav-item');
 
-// 3D Cyber Background Particle System
-const canvas = document.getElementById('cyber-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let mouse = { x: null, y: null };
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-window.addEventListener('resize', resizeCanvas);
-window.addEventListener('mousemove', e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-
-class Particle {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.opacity = Math.random() * 0.5 + 0.2;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        // Mouse repulsion
-        if (mouse.x && mouse.y) {
-            const dx = mouse.x - this.x;
-            const dy = mouse.y - this.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 100) {
-                this.x -= dx / 20;
-                this.y -= dy / 20;
-            }
-        }
-
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-            this.reset();
-        }
-    }
-    draw() {
-        ctx.fillStyle = `rgba(139, 92, 246, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-
-// Track whether the tab is hidden. Robust across Chrome/Edge (works
-// whether the engine exposes `document.hidden` or `document.visibilityState`).
-let tabVisible = true;
-if (typeof document.addEventListener === 'function') {
-    document.addEventListener('visibilitychange', () => {
-        tabVisible = !(document.hidden === true
-            || (typeof document.visibilityState !== 'undefined' && document.visibilityState === 'hidden'));
+  function setActive(id) {
+    sidebarLinks.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
     });
-}
-function tabHides() { return !tabVisible; }
-
-function isPhoneViewport() {
-    const w = window.innerWidth || document.documentElement.clientWidth;
-    return w <= 768;
-}
-
-// True on phones/tablets (touch). We use this to STOP the animated
-// background on touch: anything moving behind the frosted dock makes
-// the nav look like it's swimming/roaming.
-function isCoarsePointer() {
-    return typeof window.matchMedia === 'function'
-        && window.matchMedia('(pointer: coarse)').matches;
-}
-
-function initParticles() {
-    resizeCanvas();
-    const count = isPhoneViewport() ? 40 : 80;
-    particles = [];
-    for (let i = 0; i < count; i++) particles.push(new Particle());
-}
-
-let lastFrameTime = 0;
-// 60fps on desktop, ~30fps on phones. A slower canvas means the blurred
-// nav doesn't have to re-blur the entire scene at max frequency.
-let FRAME_INTERVAL_MS = isPhoneViewport() ? 1000 / 30 : 1000 / 60;
-
-function animate() {
-    // Freeze heavy rendering entirely while the tab is hidden (battery/GPU).
-    if (tabHides()) {
-        lastFrameTime = performance.now();
-        requestAnimationFrame(animate);
-        return;
-    }
-
-    const now = performance.now();
-    const elapsed = now - lastFrameTime;
-    if (elapsed < FRAME_INTERVAL_MS) {
-        requestAnimationFrame(animate);
-        return;
-    }
-    lastFrameTime = now;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-        p.update();
-        p.draw();
+    mobileLinks.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
     });
-    requestAnimationFrame(animate);
-}
+  }
 
-// Initializing Cyber Background
-initParticles();
-if (isCoarsePointer()) {
-    // Mobile touch: paint ONE static frame and stop. A frozen background
-    // means the glass dock has nothing moving behind it to "swim" against.
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => p.draw());
-} else {
-    animate();
-}
-
-// Active-section nav highlight via IntersectionObserver: no layout reads
-// inside a scroll listener, so the dock and page don't re-layout while you
-// scroll (this killed the mobile jitter/flicker).
-const navSpy = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        const id = entry.target.getAttribute('id');
-        if (!entry.isIntersecting) {
-            // When a section leaves the center band entirely, drop its pill.
-            document.querySelectorAll('.nav-item').forEach((link) => {
-                if (link.getAttribute('href').includes(id)) link.classList.remove('active');
-            });
-            return;
-        }
-        document.querySelectorAll('.nav-item').forEach((link) => {
-            link.classList.toggle('active', link.getAttribute('href').includes(id));
-        });
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) setActive(e.target.id);
     });
-}, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-document.querySelectorAll('section').forEach((s) => navSpy.observe(s));
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
 
-// 3D grid parallax — rAF-throttled + pass-throttled, never on the raw
-// scroll event (that was sync and per sub-pixel on touch → stutter).
-let parallaxDirty = false;
-let lastY = window.scrollY;
-window.addEventListener('scroll', () => { parallaxDirty = true; }, { passive: true });
+  sections.forEach(function(s) { io.observe(s); });
+})();
 
-function parallaxLoop() {
-    if (!isCoarsePointer() && !tabHides() && parallaxDirty) {
-        parallaxDirty = false;
-        const y = window.scrollY;
-        if (y !== lastY) {
-            lastY = y;
-            document.documentElement.style.setProperty('--scroll-y', `${Math.round(y * 0.15)}px`);
-        }
-    }
-    requestAnimationFrame(parallaxLoop);
-}
-// Parallax only on precise (mouse) pointers — on touch it's another
-// moving layer behind the dock, which adds to the "roaming" feel.
-if (!isCoarsePointer()) requestAnimationFrame(parallaxLoop);
-
-// Spotlight Hover Effect
-document.querySelectorAll('.spotlight-wrapper, .glass-card:not(.project-card), .project-card').forEach(wrapper => {
-    wrapper.addEventListener('mousemove', e => {
-        const rect = wrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        wrapper.style.setProperty('--mouse-x', `${x}px`);
-        wrapper.style.setProperty('--mouse-y', `${y}px`);
+/* ── 6. PROJECT FILTER ─────────────────────────────── */
+(function initFilter() {
+  const btns   = document.querySelectorAll('.filter-btn');
+  const cards  = document.querySelectorAll('.project-card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(function(c) {
+        c.classList.toggle('hidden-card', f !== 'all' && c.dataset.category !== f);
+      });
     });
-});
+  });
+})();
 
-// Project Filtering
-const filterButtons = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
+/* ── 7. DRAG-SCROLL on project scroller ─────────────── */
+(function initDragScroll() {
+  const el = document.getElementById('projects-scroller');
+  if (!el) return;
+  let isDown = false, startX = 0, scrollLeft = 0;
+  el.addEventListener('mousedown',  function(e) { isDown = true; el.classList.add('grabbing'); startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; });
+  el.addEventListener('mouseleave', function()  { isDown = false; el.classList.remove('grabbing'); });
+  el.addEventListener('mouseup',    function()  { isDown = false; el.classList.remove('grabbing'); });
+  el.addEventListener('mousemove',  function(e) { if (!isDown) return; e.preventDefault(); const x = e.pageX - el.offsetLeft; el.scrollLeft = scrollLeft - (x - startX) * 1.5; });
+})();
 
-filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Update active button
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filter = btn.getAttribute('data-filter');
-
-        projectCards.forEach(card => {
-            const category = card.getAttribute('data-category');
-            if (filter === 'all' || category === filter) {
-                card.classList.remove('hidden-project');
-            } else {
-                card.classList.add('hidden-project');
-            }
-        });
-    });
-});
-
-// Modal Functions
+/* ── 8. MODALS ──────────────────────────────────────── */
 function openModal(id) {
-    const modal = document.getElementById(id);
-    if(modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('open'); document.body.style.overflow = 'hidden'; }
 }
 
 function closeModal(id) {
-    const modal = document.getElementById(id);
-    if(modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+  const el = document.getElementById(id);
+  if (el) { el.classList.remove('open'); document.body.style.overflow = ''; }
 }
 
-// Close on outside click for all modals
-window.addEventListener('click', function(e) {
-    if (e.target.classList.contains('modal-overlay')) {
-        closeModal(e.target.id);
-    }
+function closeModalOverlay(e, id) {
+  if (e.target === e.currentTarget) closeModal(id);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(function(m) {
+      m.classList.remove('open');
+    });
+    document.body.style.overflow = '';
+  }
 });
+
+/* ── 9. PARTICLE CANVAS (Claude orange) ─────────────── */
+(function initCanvas() {
+  const canvas = document.getElementById('cyber-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const isMobile = window.matchMedia('(pointer: coarse)').matches;
+  const COUNT = isMobile ? 30 : 70;
+
+  function resize() {
+    const main = document.getElementById('main-content') || document.body;
+    canvas.width  = main.offsetWidth;
+    canvas.height = main.offsetHeight;
+  }
+  resize();
+
+  const particles = [];
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.4 + 0.1
+    });
+  }
+
+  let lastFrame = 0;
+  const FPS_LIMIT = isMobile ? 20 : 30;
+  const INTERVAL  = 1000 / FPS_LIMIT;
+
+  function draw(ts) {
+    requestAnimationFrame(draw);
+    if (ts - lastFrame < INTERVAL) return;
+    lastFrame = ts;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(217, 119, 87, ' + p.opacity + ')';
+      ctx.fill();
+    });
+
+    // Draw connecting lines (orange)
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(217, 119, 87, ' + (0.08 * (1 - dist / 120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
+  window.addEventListener('resize', resize, { passive: true });
+})();
