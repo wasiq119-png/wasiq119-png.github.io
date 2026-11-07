@@ -2045,3 +2045,45 @@ a.sidebar-cv-btn:hover {
   text-align: center;
   flex-shrink: 0;
 }
+
+/* ── About side-section labels (Education / Certifications / Quick Facts) ── */
+.about-side-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  opacity: 0.75;
+  margin-bottom: 0.45rem;
+}
+
+/* ── Certifications card ── */
+.cert-card.glass-card {
+  padding: 1rem 1.2rem !important;
+}
+.cert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cert-icon {
+  font-size: 1.1rem;
+  color: var(--accent-1);
+  flex-shrink: 0;
+}
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.cert-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.cert-issuer {
+  font-size: 0.75rem;
+  color: var(--accent-1);
+  opacity: 0.8;
+}
