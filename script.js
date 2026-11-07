@@ -1,5 +1,5 @@
 // Typing Animation
-const words = ["Angular & React Apps", "Java & Python Backend", "Modern Node.js APIs", "Interactive Full-Stack Solutions"];
+const words = ["AI-Native Full-Stack Systems", "LLM Pipelines & Multi-Agent Flows", "Spring Boot · Next.js 16 · Groq", "Production Java & React Engineer"];
 let i = 0;
 let j = 0;
 let isDeleting = false;
@@ -140,22 +140,65 @@ class Particle {
         }
     }
     draw() {
-        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx.fillStyle = `rgba(139, 92, 246, ${this.opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-function initParticles() {
-    resizeCanvas();
-    particles = [];
-    for (let i = 0; i < 80; i++) {
-        particles.push(new Particle());
-    }
+// Track whether the tab is hidden. Robust across Chrome/Edge (works
+// whether the engine exposes `document.hidden` or `document.visibilityState`).
+let tabVisible = true;
+if (typeof document.addEventListener === 'function') {
+    document.addEventListener('visibilitychange', () => {
+        tabVisible = !(document.hidden === true
+            || (typeof document.visibilityState !== 'undefined' && document.visibilityState === 'hidden'));
+    });
+}
+function tabHides() { return !tabVisible; }
+
+function isPhoneViewport() {
+    const w = window.innerWidth || document.documentElement.clientWidth;
+    return w <= 768;
 }
 
+// True on phones/tablets (touch). We use this to STOP the animated
+// background on touch: anything moving behind the frosted dock makes
+// the nav look like it's swimming/roaming.
+function isCoarsePointer() {
+    return typeof window.matchMedia === 'function'
+        && window.matchMedia('(pointer: coarse)').matches;
+}
+
+function initParticles() {
+    resizeCanvas();
+    const count = isPhoneViewport() ? 40 : 80;
+    particles = [];
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+
+let lastFrameTime = 0;
+// 60fps on desktop, ~30fps on phones. A slower canvas means the blurred
+// nav doesn't have to re-blur the entire scene at max frequency.
+let FRAME_INTERVAL_MS = isPhoneViewport() ? 1000 / 30 : 1000 / 60;
+
 function animate() {
+    // Freeze heavy rendering entirely while the tab is hidden (battery/GPU).
+    if (tabHides()) {
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animate);
+        return;
+    }
+
+    const now = performance.now();
+    const elapsed = now - lastFrameTime;
+    if (elapsed < FRAME_INTERVAL_MS) {
+        requestAnimationFrame(animate);
+        return;
+    }
+    lastFrameTime = now;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
         p.update();
@@ -166,32 +209,55 @@ function animate() {
 
 // Initializing Cyber Background
 initParticles();
-animate();
+if (isCoarsePointer()) {
+    // Mobile touch: paint ONE static frame and stop. A frozen background
+    // means the glass dock has nothing moving behind it to "swim" against.
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => p.draw());
+} else {
+    animate();
+}
 
-// Modern Scroll Interaction
-window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    
-    // Update active section in nav
-    let currentSection = '';
-    document.querySelectorAll('section').forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollPos >= sectionTop - 150) {
-            currentSection = section.getAttribute('id');
+// Active-section nav highlight via IntersectionObserver: no layout reads
+// inside a scroll listener, so the dock and page don't re-layout while you
+// scroll (this killed the mobile jitter/flicker).
+const navSpy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        const id = entry.target.getAttribute('id');
+        if (!entry.isIntersecting) {
+            // When a section leaves the center band entirely, drop its pill.
+            document.querySelectorAll('.nav-item').forEach((link) => {
+                if (link.getAttribute('href').includes(id)) link.classList.remove('active');
+            });
+            return;
         }
+        document.querySelectorAll('.nav-item').forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href').includes(id));
+        });
     });
+}, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+document.querySelectorAll('section').forEach((s) => navSpy.observe(s));
 
-    document.querySelectorAll('.nav-item').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(currentSection)) {
-            link.classList.add('active');
+// 3D grid parallax — rAF-throttled + pass-throttled, never on the raw
+// scroll event (that was sync and per sub-pixel on touch → stutter).
+let parallaxDirty = false;
+let lastY = window.scrollY;
+window.addEventListener('scroll', () => { parallaxDirty = true; }, { passive: true });
+
+function parallaxLoop() {
+    if (!isCoarsePointer() && !tabHides() && parallaxDirty) {
+        parallaxDirty = false;
+        const y = window.scrollY;
+        if (y !== lastY) {
+            lastY = y;
+            document.documentElement.style.setProperty('--scroll-y', `${Math.round(y * 0.15)}px`);
         }
-    });
-
-    // 3D Grid Parallax
-    document.documentElement.style.setProperty('--scroll-y', `${scrollPos * 0.15}px`);
-});
+    }
+    requestAnimationFrame(parallaxLoop);
+}
+// Parallax only on precise (mouse) pointers — on touch it's another
+// moving layer behind the dock, which adds to the "roaming" feel.
+if (!isCoarsePointer()) requestAnimationFrame(parallaxLoop);
 
 // Spotlight Hover Effect
 document.querySelectorAll('.spotlight-wrapper, .glass-card:not(.project-card), .project-card').forEach(wrapper => {
