@@ -45,6 +45,7 @@ function setState(s) {
 }
 
 /* per-frame DOM sync (only when scroll changes) */
+const bodies = $$('.project-body');
 const nav = $('#nav'), hero = $('#top'), principles = $$('.principle');
 const timeline = $('#timeline'), portrait = $('.portrait'), sections = $$('[data-state]');
 let lastY = -1, lastK = -2;
@@ -53,6 +54,8 @@ function sync(y, f) {
   hero.style.setProperty('--p', clamp(y / (vh * 0.85)).toFixed(3));
   nav.classList.toggle('small', y > 40);
   nav.classList.toggle('dim', f > idx.p1 - 0.45 && f < idx.p4 + 0.5);
+  // a project caption is only on screen while the camera is at its room
+  bodies.forEach((b, i) => b.classList.toggle('live', Math.abs(f - idx['w' + (i + 1)]) < 0.3));
   // principles, one at a time
   const k = f < idx.p1 - 0.55 ? -1 : f > idx.p4 + 0.6 ? 4 : clamp(Math.round(f - idx.p1), 0, 3);
   if (k !== lastK) { lastK = k; principles.forEach((p, i) => { p.classList.toggle('on', i === k); p.classList.toggle('was', i < k); }); }

@@ -142,9 +142,23 @@ main{position:relative;z-index:2}
 .project-link a{position:relative;text-decoration:none;padding:.4rem 0;border-bottom:1px solid var(--gray)}
 .project-link a::after{bottom:-1px}
 
+/* captions arrive with the camera, line by line */
+.js .project-body>*{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .7s var(--ease)}
+.js .project-body.live>*{opacity:1;transform:none;transition:opacity .8s ease,transform 1.1s var(--ease)}
+.js .project-body.live>:nth-child(2){transition-delay:.08s}
+.js .project-body.live>:nth-child(3){transition-delay:.16s}
+.js .project-body.live>:nth-child(4){transition-delay:.24s}
+.js .project-body.live>:nth-child(5){transition-delay:.32s}
+.js .project-body.live>:nth-child(6){transition-delay:.4s}
+.js .project-body:not(.live){pointer-events:none}
+.js .project-body::before{transition:opacity .6s ease}
+.js .project-body:not(.live)::before{opacity:0}
+
 /* stack */
-.system{min-height:175vh;padding:30vh var(--pad) 26vh;display:flex;flex-direction:column}
-.system-head{display:flex;flex-direction:column-reverse;gap:1.5rem;margin-bottom:14vh}
+.system{height:240vh}
+.system-stage{position:sticky;top:0;height:100vh;padding:6rem var(--pad) 4rem;display:flex;flex-direction:column;justify-content:center}
+.system .display{font-size:clamp(3rem,7.2vw,8rem)}
+.system-head{display:flex;flex-direction:column-reverse;gap:1.2rem;margin-bottom:7vh}
 .layers{width:min(100%,34rem);border-bottom:1px solid var(--gray)}
 .layer{display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;padding:1.6rem 0;border-top:1px solid var(--gray);transition:opacity .4s ease}
 .layer h3{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--sec);padding-top:.55rem}
@@ -208,7 +222,8 @@ main{position:relative;z-index:2}
   .project-title{font-size:clamp(2.5rem,11.5vw,4.6rem);margin-bottom:1.1rem}
   .project-concept{font-size:1.12rem}
   .project-desc{font-size:.95rem}
-  .system{min-height:0;padding:16vh var(--pad) 22vh}
+  .system{height:auto}
+  .system-stage{position:static;height:auto;padding:16vh var(--pad) 22vh}
   .layer{grid-template-columns:1fr;gap:.2rem}
   .layer button{font-size:1.25rem;line-height:1.7}
   .path{min-height:0;padding:14vh var(--pad) 16vh}

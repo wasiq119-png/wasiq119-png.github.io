@@ -247,7 +247,6 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   /* ════════ 4. THE STACK ════════ */
   const SX = mobile ? 0 : 4.6, SZ = -192, TH = 1.75;
   const tierMat = [0, 1, 2, 3].map(() => M.white.clone());
-  tierMat.forEach((m) => { m.emissive = new THREE.Color(COL.accent); m.emissiveIntensity = 0; });
   const tierGlow = [0, 0, 0, 0];
   let tierTarget = null;
   B('concrete', 10, 0.3, 7.8, SX, 0.15, SZ);
@@ -263,7 +262,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   const brain = [[-2.2, 0.5], [-0.6, -0.7], [0.9, 0.6], [2.4, -0.4]];
   brain.forEach(([x, z]) => mesh(M.accent, 0.3, 0.3, 0.3, x - 0.2, TH * 2 + 0.75, z, stack));          // intelligence: linked nodes
   path(brain.map(([x, z]) => [x - 0.2, TH * 2 + 0.75, z]), COL.accent, stack, 0.9);
-  mesh(M.glass, 5.4, 1.5, 3.8, 0.4, TH * 3 + 0.75, 0, stack, true);                                      // interface: the window
+  mesh(M.glass, 5.4, 1.5, 3.8, 0.4, TH * 3 + 0.75, 0, stack, true);
+  tierMat.forEach((m) => { m.transparent = true; });                                      // interface: the window
 
   /* ════════ 5. EXPERIENCE BEAM ════════ */
   const EX = mobile ? 0 : 4.4, EZ = -218;
@@ -278,9 +278,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   /* ════════ 6. EDUCATION ════════ */
   const DX = mobile ? 0 : -3.2;
   B('concrete', 7.4, 0.16, 3.6, DX, 0.08, -244);
-  B('white', 0.46, 3.4, 1.5, DX - 1.5, 1.86, -244);
-  B('white', 0.46, 2.6, 1.5, DX + 0.4, 1.46, -244);
-  B('white', 0.3, 1.0, 0.9, DX + 1.9, 0.66, -244);
+  B('white', 2.3, 0.14, 1.5, DX - 1.6, 0.23, -244);
+  B('white', 2.3, 0.14, 1.5, DX + 1.3, 0.23, -244);
 
   /* flush statics */
   for (const kind in stat) {
@@ -321,8 +320,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
 
   /* ── camera path: one keyframe per anchor in the page ── */
   const KF = {
-    hero: [[-3.5, 3.4, 21], [3.4, 3.7, 0]],
-    about: [[-8.2, 2.0, 9.5], [3.4, 4.3, -1]],
+    hero: [[11, 9.5, 46], [-10.5, -4.6, 0]],
+    about: [[-8.6, 2.0, 10], [8.6, 4.6, -3]],
     p1: [[0, 1.9, -9.5], [0, 2.4, -30]],
     p2: [[0, 1.75, -19], [0, 2.4, -40]],
     p3: [[0, 2.5, -28], [0, 2.3, -50]],
@@ -331,9 +330,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     stack: [[-2.8, 4.4, SZ + 17.5], [SX - 4, 3.4, SZ]],
     exp: [[-3.2, 5.2, EZ + 15], [EX - 3.5, 5.8, EZ]],
     edu: [[1.6, 1.9, -229.5], [DX, 1.8, -244]],
-    exit: [[3, 17, -221], [DX, 0, -247]],
   };
-  for (let i = 0; i < 5; i++) KF['w' + (i + 1)] = [[-2.6, 3.0, ROOM_Z(i) + 16], [2.6, 2.4, ROOM_Z(i)]];
+  for (let i = 0; i < 5; i++) KF['w' + (i + 1)] = [[-2.6, 3.0, ROOM_Z(i) + 16], [1.9, 2.4, ROOM_Z(i)]];
   if (mobile) {
     KF.hero = [[0, 4.4, 30], [HX - 2.6, 1.2, 0]];
     KF.about = [[7, 2.2, 15], [2.4, 2.6, 0]];
@@ -342,6 +340,14 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     KF.stack = [[0, 6, SZ + 30], [0, -4.5, SZ]];
     KF.exp = [[0, 6, EZ + 24], [0, 2.4, EZ]];
     KF.edu = [[0, 2.4, -227], [0, 0.2, -244]];
+  }
+  {
+    const e = KF.edu[0], dx = DX - e[0], dz = -244 - e[2], l = Math.hypot(dx, dz), ux = dx / l, uz = dz / l;
+    const door = new THREE.Group(); door.position.set(DX + ux * 14, 0, -244 + uz * 14); door.rotation.y = Math.atan2(ux, uz); scene.add(door);
+    mesh(M.white, 0.22, 4.4, 0.22, -1.4, 2.2, 0, door, true);
+    mesh(M.white, 0.22, 4.4, 0.22, 1.4, 2.2, 0, door, true);
+    mesh(M.white, 3.02, 0.22, 0.22, 0, 4.51, 0, door, true);
+    KF.exit = [[DX + ux * 17.5, 1.8, -244 + uz * 17.5], [DX + ux * 40, 1.9, -244 + uz * 40]];
   }
   const names = Object.keys(idx).sort((a, b) => idx[a] - idx[b]);
   const V = (a) => new THREE.Vector3(a[0], a[1], a[2]);
@@ -380,7 +386,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     hemi.intensity = lerp(1.75, 1.0, intro) + white * 0.6;
     sun.intensity = lerp(0, 1.15, intro) * (1 - white * 0.6);
     LM.opacity = lerp(0, 0.17, intro);
-    scene.fog.near = lerp(14, 1.5, white); scene.fog.far = lerp(40, 16, white);
+    const arrive = sm(0, 0.85, fS);
+    scene.fog.near = lerp(lerp(mobile ? 14 : 38, 14, arrive), 1.5, white); scene.fog.far = lerp(lerp(mobile ? 40 : 84, 40, arrive), 16, white);
 
     // camera
     const u = clamp(fS / last);
@@ -397,7 +404,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     lamp.intensity = ptr.on * 15;
 
     // daylight follows the traveller
-    sun.target.position.set(Math.round(T.x), 0, Math.round(lerp(P.z, T.z, 0.6)));
+    sun.target.position.set(Math.round(lerp(HX, T.x, arrive)), 0, Math.round(lerp(0, lerp(P.z, T.z, 0.6), arrive)));
     sun.position.copy(sun.target.position).add(ray.set(10, 17, 8));
     floor.position.set(sun.target.position.x, 0, sun.target.position.z);
 
@@ -412,8 +419,8 @@ export function createScene(canvas, { mobile, reduced, idx }) {
 
     // stack: hovered layers warm up
     for (let i = 0; i < 4; i++) {
-      tierGlow[i] += ((tierTarget && tierTarget.has(i) ? 1 : 0) - tierGlow[i]) * k;
-      tierMat[i].emissiveIntensity = tierGlow[i] * 0.42;
+      tierGlow[i] += ((tierTarget && !tierTarget.has(i) ? 1 : 0) - tierGlow[i]) * k;
+      tierMat[i].opacity = 1 - tierGlow[i] * 0.88;
     }
 
     // experience: the line becomes a beam
