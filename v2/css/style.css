@@ -33,7 +33,7 @@ main{position:relative;z-index:2}
 .meta b{font-weight:500;color:var(--ink);margin-right:1.2em}
 .muted{color:var(--sec)}
 .line{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
-.line-in{display:block;will-change:transform}
+.line-in{display:block}
 .js [data-reveal] .line-in{transform:translateY(108%) rotate(2.5deg);transform-origin:0 100%;transition:transform 1.15s var(--ease)}
 .js [data-reveal] .line:nth-child(2) .line-in{transition-delay:.07s}
 .js [data-reveal] .line:nth-child(3) .line-in{transition-delay:.14s}
