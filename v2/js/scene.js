@@ -16,7 +16,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(COL.bg, 15, 50);
+  scene.fog = new THREE.Fog(COL.bg, 14, 40);
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 150);
 
   /* ── materials ── */
@@ -24,9 +24,9 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   const M = {
     white: std({ color: COL.surf }),
     concrete: std({ color: 0xE3E0D6, roughness: 1 }),
-    glass: std({ color: 0xE9ECE4, roughness: 0.2, transparent: true, opacity: 0.3, depthWrite: false }),
-    ink: std({ color: 0x2B2A26, roughness: 0.75 }),
-    accent: std({ color: COL.accent, roughness: 0.6, emissive: COL.accent, emissiveIntensity: 0.3 }),
+    glass: std({ color: 0xF1F3EE, roughness: 0.06, transparent: true, opacity: 0.2, depthWrite: false, envMapIntensity: 2.2 }),
+    ink: std({ color: 0x3B3732, roughness: 0.38, metalness: 0.85, envMapIntensity: 1.5 }),
+    accent: std({ color: COL.accent, roughness: 0.5, emissive: COL.accent, emissiveIntensity: 0.22 }),
     green: std({ color: COL.green, roughness: 0.7, emissive: COL.green, emissiveIntensity: 0.2 }),
     paper: std({ color: 0xEFECE3 }),
   };
@@ -48,7 +48,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
       for (const i of EDG) edgePts.push(v[i].x, v[i].y, v[i].z);
     }
   }
-  function frameCube(cx, cy, cz, w, h, d, t = 0.07, kind = 'ink') {
+  function frameCube(cx, cy, cz, w, h, d, t = 0.05, kind = 'ink') {
     for (const a of [-1, 1]) for (const b of [-1, 1]) {
       B(kind, t, t, d, cx + a * w / 2, cy + b * h / 2, cz, false);
       B(kind, t, h, t, cx + a * w / 2, cy, cz + b * d / 2, false);
@@ -93,8 +93,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
 
   /* ════════ 2. THE HALL (how I think) ════════ */
   const hall = new THREE.Group(); scene.add(hall);
-  const frames = [], strips = [], panels = [], lamps = [], hallNodes = [];
-  const zig = [];
+  const frames = [], strips = [];
   for (let i = 0; i < 12; i++) {
     const z = -13 - 3.2 * i;
     const g = new THREE.Group(); g.position.z = z; hall.add(g);
@@ -103,18 +102,13 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     mesh(M.white, 5.44, 0.24, 0.24, 0, 4.72, 0, g, true);
     frames.push(g);
     strips.push(mesh(M.concrete, 3.4, 0.08, 2.5, 0, 0.04, z - 1.6, hall));
-    const side = i % 2 ? 1 : -1;
-    if (i % 3 !== 2) panels.push(mesh(M.glass, 0.05, 3.1, 2.7, side * 2.6, 1.75, z - 1.6, hall));
-    lamps.push(mesh(M.accent, 1.3, 0.035, 0.035, 0, 4.56, z, hall));
-    const p = [side * 2.6, 4.72, z];
-    zig.push(p); if (i % 2 === 0) zig.push([side * 2.6, 0.1, z], p);
-    hallNodes.push(mesh(M.accent, 0.13, 0.13, 0.13, p[0], p[1], p[2], hall));
   }
-  const zigLine = path(zig, COL.accent, hall, 0.9);
+  const SPINE = 36;
+  const spine = mesh(M.accent, 0.035, 0.035, 1, 0, 4.58, -13, hall);   // the one line that connects every frame
 
   /* ════════ 3. PROJECT ROOMS ════════ */
   const ROOM_Z = (i) => -68 - 24 * i;
-  const SIDE = (i) => (i % 2 === 0 ? 1 : -1);
+  const SIDE = (i) => (mobile ? (i % 2 === 0 ? 1 : -1) : 1);   // desktop: one straight rail, every room on the right
   const rooms = [];
   for (let i = 0; i < 5; i++) {
     const cx = SIDE(i) * 4.7, cz = ROOM_Z(i);
@@ -127,20 +121,16 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   // 01 — AI Software House: a manager node dispatches to specialist agents; QA feeds back.
   (() => {
     const g = rooms[0].g;
-    const P = [[0, 4.1, 0], [-2.4, 1.5, 1.3], [-0.8, 1.5, -1.3], [0.8, 1.5, 1.3], [2.4, 1.5, -1.3]];
+    const P = [[0, 4.1, 0], [-2.4, 0.56, 1.3], [-0.8, 0.56, -1.3], [0.8, 0.56, 1.3], [2.4, 0.56, -1.3]];
     const nodes = P.map((p, k) => mesh(k ? M.white : M.ink, k ? 0.72 : 0.9, k ? 0.72 : 0.9, k ? 0.72 : 0.9, p[0], p[1], p[2], g, !!k));
-    const stems = P.slice(1).map((p) => mesh(M.ink, 0.04, p[1] - 0.36, 0.04, p[0], (p[1] - 0.36) / 2, p[2], g));
-    const grid = [];
-    for (let k = -3; k <= 3; k++) grid.push(path([[k, 0.02, -3], [k, 0.02, 3]], COL.ink, g, 0.12), path([[-3, 0.02, k], [3, 0.02, k]], COL.ink, g, 0.12));
     const links = P.slice(1).map((p) => path([P[0], p], COL.accent, g, 0.9));
     const chain = path(P.slice(1), COL.ink, g, 0.35);
-    const back = path([P[4], [3.1, 3.3, -1.3], [1.4, 4.4, -0.6], P[0]], COL.green, g, 0.9);
+    const back = path([P[4], [3.2, 2.6, -1.3], [1.6, 4.3, -0.6], P[0]], COL.green, g, 0.9);
     const pulses = P.slice(1).map(() => mesh(M.accent, 0.13, 0.13, 0.13, 0, 0, 0, g));
     rooms[0].update = (t, time) => {
       nodes.forEach((n, k) => pop(n, k ? [.72, .72, .72] : [.9, .9, .9], sm(k * 0.1, k * 0.1 + 0.3, t)));
-      stems.forEach((s, k) => { s.visible = t > 0.1 + k * 0.1; });
       const lo = sm(0.4, 0.8, t);
-      [...links, chain, back, ...grid].forEach((l) => { l.material.opacity = l.userData.o * lo; });
+      [...links, chain, back].forEach((l) => { l.material.opacity = l.userData.o * lo; });
       pulses.forEach((p, k) => {
         const a = P[0], b = P[k + 1], u = (time * 0.00028 + k * 0.23) % 1;
         p.visible = t > 0.85;
@@ -154,7 +144,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     const g = rooms[1].g, r = rng(11);
     const walls = [-2.5, 0, 2.5].map((x, k) => mesh(k === 1 ? M.white : M.glass, 0.08, 3.6, 4.6, x, 2.1, 0, g, k === 1));
     const bits = [];
-    for (let k = 0; k < (mobile ? 16 : 26); k++) {
+    for (let k = 0; k < (mobile ? 10 : 14); k++) {
       const m = mesh(k % 4 === 0 ? M.accent : M.ink, 0.26, 0.045, 0.045, 0, 0, 0, g);
       m.userData = { y: 0.6 + r() * 3, z: -2 + r() * 4, row: 0.9 + (k % 4) * 0.8, lane: -1.5 + (k % 5) * 0.75, sp: 0.00012 + r() * 0.00014, ph: r(), dir: k % 2 ? 1 : -1 };
       bits.push(m);
@@ -180,7 +170,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
       for (let k = 0; k < 16; k++) {
         const n = s * 16 + k, col = n % 12, row = Math.floor(n / 12), h = 0.25 + r() * 1.7;
         const local = new THREE.Vector3(((k % 4) - 1.5) * 0.47, 0, (Math.floor(k / 4) - 1.5) * 0.6).applyQuaternion(qa).add(base);
-        const m = mesh(r() < 0.6 ? M.accent : M.paper, 0.44, 0.03, 0.56, 0, 0, 0, g);
+        const m = mesh(r() < 0.27 ? M.accent : M.paper, 0.44, 0.03, 0.56, 0, 0, 0, g);
         m.userData = { a: local, qa: qa.clone(), b: new THREE.Vector3(-2.75 + col * 0.5, h / 2, -0.9 + row * 0.6), h, d: r() * 0.35 };
         tiles.push(m);
       }
@@ -206,15 +196,13 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     const ring = path([...S, S[0]], COL.ink, g, 0.55);
     const hub = mesh(M.ink, 0.5, 0.5, 0.5, 0, 4.0, 0, g);
     const spokes = S.map((p) => path([[0, 4, 0], p], COL.green, g, 0.55));
-    const twin = mesh(M.glass, 0.95, 0.95, 0.95, 3.4, 1.7, -1.2, g, true);
-    const ev = []; for (let k = 0; k < (mobile ? 6 : 10); k++) ev.push(mesh(M.accent, 0.15, 0.15, 0.15, 0, 0, 0, g));
+    const ev = []; for (let k = 0; k < (mobile ? 4 : 6); k++) ev.push(mesh(M.accent, 0.15, 0.15, 0.15, 0, 0, 0, g));
     rooms[3].update = (t, time) => {
       cubes.forEach((c, k) => pop(c, [.95, .95, .95], sm(k * 0.08, k * 0.08 + 0.3, t)));
       legs.forEach((l, k) => { l.visible = t > k * 0.08 + 0.05; });
       const lo = sm(0.45, 0.8, t);
       ring.material.opacity = 0.55 * lo; spokes.forEach((s) => { s.material.opacity = 0.55 * lo; });
       pop(hub, [.5, .5, .5], sm(0.4, 0.7, t));
-      pop(twin, [.95, .95, .95], t > 0.9 ? sm(0.1, 0.5, Math.sin(time * 0.0005) * 0.5 + 0.5) : 0);
       ev.forEach((e, k) => {
         const u = ((time * 0.00016 + k / ev.length) % 1) * 6, i = Math.floor(u), f = u - i, a = S[i % 6], b = S[(i + 1) % 6];
         e.visible = t > 0.8;
@@ -312,12 +300,23 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   const sun = new THREE.DirectionalLight(0xFFF5E8, 0);
   sun.castShadow = true;
   sun.shadow.mapSize.set(mobile ? 1024 : 2048, mobile ? 1024 : 2048);
-  Object.assign(sun.shadow.camera, { left: -24, right: 24, top: 24, bottom: -24, near: 1, far: 90 });
+  Object.assign(sun.shadow.camera, { left: -19, right: 19, top: 19, bottom: -19, near: 1, far: 80 });
   sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.05;
   const lamp = new THREE.PointLight(0xFFEBD6, 0, 18, 1.7);   // the pointer is light
-  const hot = new THREE.PointLight(0xFFE2C2, 0, 16, 1.6);    // hovered project
-  scene.add(hemi, sun, sun.target, lamp, hot);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(130, 130), new THREE.ShadowMaterial({ color: 0x5E513F, opacity: 0.17 }));
+  scene.add(hemi, sun, sun.target, lamp);
+  // a soft daylight room for the materials to sit in: one large window, pale walls, warm floor
+  {
+    const env = new THREE.Scene();
+    const basic = (r, g, b, side) => { const m = new THREE.MeshBasicMaterial({ side: side || THREE.FrontSide }); m.color.setRGB(r, g, b); return m; };
+    env.add(new THREE.Mesh(new THREE.SphereGeometry(30, 24, 12), basic(0.93, 0.915, 0.88, THREE.BackSide)));
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(26, 14), basic(3.4, 3.2, 2.9, THREE.DoubleSide)); win.position.set(16, 14, 10); win.lookAt(0, 0, 0); env.add(win);
+    const gnd = new THREE.Mesh(new THREE.CircleGeometry(30, 24), basic(0.62, 0.58, 0.51, THREE.DoubleSide)); gnd.rotation.x = -Math.PI / 2; gnd.position.y = -6; env.add(gnd);
+    const pm = new THREE.PMREMGenerator(renderer);
+    scene.environment = pm.fromScene(env, 0.03).texture;
+    scene.environmentIntensity = 0.5;
+    pm.dispose();
+  }
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(130, 130), new THREE.ShadowMaterial({ color: 0x4E4334, opacity: 0.2 }));
   floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
 
   /* ── camera path: one keyframe per anchor in the page ── */
@@ -325,16 +324,16 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     hero: [[-3.5, 3.4, 21], [3.4, 3.7, 0]],
     about: [[-8.2, 2.0, 9.5], [3.4, 4.3, -1]],
     p1: [[0, 1.9, -9.5], [0, 2.4, -30]],
-    p2: [[0.9, 1.7, -19], [-0.4, 2.5, -40]],
-    p3: [[-0.9, 2.4, -28], [0.5, 2.2, -48]],
+    p2: [[0, 1.75, -19], [0, 2.4, -40]],
+    p3: [[0, 2.5, -28], [0, 2.3, -50]],
     p4: [[0, 1.9, -37.5], [0, 2.3, -60]],
-    gate: [[0, 2.4, -49.5], [3.4, 2.7, -68]],
+    gate: [[-1.2, 2.5, -49.5], [2.4, 2.6, -68]],
     stack: [[-2.8, 4.4, SZ + 17.5], [SX - 4, 3.4, SZ]],
     exp: [[-3.2, 5.2, EZ + 15], [EX - 3.5, 5.8, EZ]],
     edu: [[1.6, 1.9, -229.5], [DX, 1.8, -244]],
     exit: [[3, 17, -221], [DX, 0, -247]],
   };
-  for (let i = 0; i < 5; i++) { const s = i % 2 === 0 ? 1 : -1; KF['w' + (i + 1)] = [[-s * 2.4, 2.9, ROOM_Z(i) + 13.5], [s * 2.0, 2.5, ROOM_Z(i)]]; }
+  for (let i = 0; i < 5; i++) KF['w' + (i + 1)] = [[-2.6, 3.0, ROOM_Z(i) + 16], [2.6, 2.4, ROOM_Z(i)]];
   if (mobile) {
     KF.hero = [[0, 4.4, 30], [HX - 2.6, 1.2, 0]];
     KF.about = [[7, 2.2, 15], [2.4, 2.6, 0]];
@@ -353,7 +352,7 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   /* ── state ── */
   const P = new THREE.Vector3(), T = new THREE.Vector3(), ray = new THREE.Vector3(), right = new THREE.Vector3(), up = new THREE.Vector3();
   const ptr = { x: 0, y: 0, tx: 0, ty: 0, on: 0, ton: 0 };
-  let fS = -1, prev = 0, t0 = 0, hotI = -1, hotK = 0;
+  let fS = -1, prev = 0, t0 = 0;
   const state = { white: 0 };
   const R = (name, a, b) => sm(idx[name] + a, idx[name] + b, fS);
 
@@ -370,18 +369,18 @@ export function createScene(canvas, { mobile, reduced, idx }) {
   function update(fT, time) {
     if (!t0) { t0 = time; prev = time; }
     const dt = Math.min(0.05, (time - prev) / 1000); prev = time;
-    fS = fS < 0 || reduced ? fT : fS + (fT - fS) * (1 - Math.exp(-dt * 4));
+    fS = fS < 0 || reduced ? fT : fS + (fT - fS) * (1 - Math.exp(-dt * 2.7));
     const k = reduced ? 1 : 1 - Math.exp(-dt * 5);
-    const now = reduced ? 0 : time;
+    const now = reduced ? 0 : time * 0.8;
 
     // arrival: the model is nearly invisible, then daylight finds it
     const intro = reduced ? 1 : sm(0.2, 3.2, (time - t0) / 1000);
     const white = R('exit', -0.6, 0);
     state.white = white;
-    hemi.intensity = lerp(3.05, 2.42, intro) + white * 0.6;
-    sun.intensity = lerp(0, 1.05, intro) * (1 - white * 0.6);
-    LM.opacity = lerp(0, 0.24, intro);
-    scene.fog.near = lerp(15, 1.5, white); scene.fog.far = lerp(50, 16, white);
+    hemi.intensity = lerp(1.75, 1.0, intro) + white * 0.6;
+    sun.intensity = lerp(0, 1.15, intro) * (1 - white * 0.6);
+    LM.opacity = lerp(0, 0.17, intro);
+    scene.fog.near = lerp(14, 1.5, white); scene.fog.far = lerp(40, 16, white);
 
     // camera
     const u = clamp(fS / last);
@@ -389,13 +388,13 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     ptr.x += (ptr.tx - ptr.x) * k; ptr.y += (ptr.ty - ptr.y) * k; ptr.on += (ptr.ton - ptr.on) * k * 0.6;
     camera.position.copy(P); camera.lookAt(T);
     right.setFromMatrixColumn(camera.matrix, 0); up.setFromMatrixColumn(camera.matrix, 1);
-    camera.position.addScaledVector(right, ptr.x * 0.4 + Math.sin(now * 0.00021) * 0.07).addScaledVector(up, ptr.y * 0.24 + Math.sin(now * 0.00017 + 1) * 0.05);
+    camera.position.addScaledVector(right, ptr.x * 0.16).addScaledVector(up, ptr.y * 0.1);
     camera.lookAt(T);
 
     // pointer light, placed on the pointer ray in front of the camera
     ray.set(ptr.x, ptr.y, 0.5).unproject(camera).sub(camera.position).normalize();
     lamp.position.copy(camera.position).addScaledVector(ray, 8);
-    lamp.intensity = ptr.on * 20;
+    lamp.intensity = ptr.on * 15;
 
     // daylight follows the traveller
     sun.target.position.set(Math.round(T.x), 0, Math.round(lerp(P.z, T.z, 0.6)));
@@ -403,19 +402,13 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     floor.position.set(sun.target.position.x, 0, sun.target.position.z);
 
     // hall: assemble → become functional → connect
-    const asm = R('p1', -1.05, 0.2), fun = R('p1', 0.45, 1.05), con = R('p2', 0.45, 1.1);
+    const asm = R('p1', -1.05, 0.2), fun = R('p1', 0.45, 1.05), con = R('p2', 0.4, 1.15);
     frames.forEach((g, i) => { const e = sm(i * 0.05, i * 0.05 + 0.4, asm); g.scale.y = Math.max(0.001, e); g.visible = e > 0.002; });
     strips.forEach((s, i) => { const e = sm(i * 0.05, i * 0.05 + 0.4, fun); s.scale.x = Math.max(0.001, 3.4 * e); s.visible = e > 0.002; });
-    panels.forEach((p, i) => { const e = sm(i * 0.06, i * 0.06 + 0.4, fun); p.scale.y = Math.max(0.001, 3.1 * e); p.position.y = 0.2 + 1.55 * e; p.visible = e > 0.002; });
-    lamps.forEach((l, i) => { const e = sm(i * 0.05 + 0.2, i * 0.05 + 0.6, fun); l.scale.x = Math.max(0.001, 1.3 * e); l.visible = e > 0.002; });
-    zigLine.geometry.setDrawRange(0, Math.floor(zig.length * con));
-    hallNodes.forEach((n, i) => pop(n, [.13, .13, .13], sm(i / 12, i / 12 + 0.1, con)));
+    spine.scale.z = Math.max(0.001, SPINE * con); spine.position.z = -13 - (SPINE * con) / 2; spine.visible = con > 0.002;
 
     // rooms assemble as the camera approaches
     rooms.forEach((r, i) => { const t = reduced ? 1 : R('w' + (i + 1), -0.9, -0.06); r.g.visible = t > 0.001; if (r.g.visible) r.update(t, now); });
-    hotK += ((hotI >= 0 ? 1 : 0) - hotK) * k;
-    if (hotI >= 0) hot.position.set(rooms[hotI].cx, 3.4, rooms[hotI].cz + 2.5);
-    hot.intensity = hotK * 46;
 
     // stack: hovered layers warm up
     for (let i = 0; i < 4; i++) {
@@ -434,6 +427,5 @@ export function createScene(canvas, { mobile, reduced, idx }) {
     update, resize, state,
     pointer(x, y, on) { ptr.tx = x; ptr.ty = y; ptr.ton = on ? 1 : 0; },
     setTiers(set) { tierTarget = set; },
-    setHot(i) { hotI = i; },
   };
 }

@@ -5,7 +5,6 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const mobile = () => innerWidth < 900;
-const rand = (a, b) => a + Math.random() * (b - a);
 
 /* paper grain */
 (() => {
@@ -15,18 +14,6 @@ const rand = (a, b) => a + Math.random() * (b - a);
   x.putImageData(d, 0, 0);
   $('.grain').style.backgroundImage = `url(${c.toDataURL()})`;
 })();
-
-/* hero: split into characters so the type can come apart on scroll */
-if (!reduced) $$('#hero-title .line-in').forEach((l) => {
-  const text = l.textContent; l.textContent = '';
-  for (const ch of text) {
-    if (ch === ' ') { l.append(' '); continue; }
-    const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch;
-    s.style.setProperty('--dx', rand(-150, 150).toFixed(0)); s.style.setProperty('--dy', rand(-300, -40).toFixed(0));
-    s.style.setProperty('--dr', rand(-32, 32).toFixed(0)); s.style.setProperty('--df', rand(1.1, 2.4).toFixed(2));
-    l.append(s);
-  }
-});
 
 /* anchors: every [data-cam] element is a camera keyframe at the scroll position where it is centred */
 let anchors = [], maxScroll = 1;
@@ -58,13 +45,12 @@ function setState(s) {
 }
 
 /* per-frame DOM sync (only when scroll changes) */
-const nav = $('#nav'), hero = $('#top'), rail = $('#rail-dot'), principles = $$('.principle');
-const timeline = $('#timeline'), portrait = $('.portrait'), sections = $$('[data-state]'), veil = $('.veil');
+const nav = $('#nav'), hero = $('#top'), principles = $$('.principle');
+const timeline = $('#timeline'), portrait = $('.portrait'), sections = $$('[data-state]');
 let lastY = -1, lastK = -2;
 function sync(y, f) {
   const vh = innerHeight;
   hero.style.setProperty('--p', clamp(y / (vh * 0.85)).toFixed(3));
-  rail.style.setProperty('--rail', (y / maxScroll).toFixed(4));
   nav.classList.toggle('small', y > 40);
   nav.classList.toggle('dim', f > idx.p1 - 0.45 && f < idx.p4 + 0.5);
   // principles, one at a time
@@ -88,7 +74,7 @@ if (magnets.length) addEventListener('pointermove', (e) => {
   for (const m of magnets) {
     const r = m.el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     const near = Math.abs(e.clientX - cx) < r.width / 2 + 46 && Math.abs(e.clientY - cy) < r.height / 2 + 46;
-    m.tx = near ? (e.clientX - cx) * 0.3 : 0; m.ty = near ? (e.clientY - cy) * 0.36 : 0; m.live = true;
+    m.tx = near ? (e.clientX - cx) * 0.18 : 0; m.ty = near ? (e.clientY - cy) * 0.22 : 0; m.live = true;
   }
 }, { passive: true });
 function springs(dt) {
@@ -136,13 +122,6 @@ function clearTech() { layers.classList.remove('active'); techBtns.forEach((b) =
 techBtns.forEach((b) => { b.addEventListener('pointerenter', () => showTech(b)); b.addEventListener('focus', () => showTech(b)); b.addEventListener('click', () => showTech(b)); b.addEventListener('blur', clearTech); });
 layers.addEventListener('pointerleave', clearTech);
 
-/* hovering a project lights its room */
-$$('.project-body').forEach((el) => {
-  const i = +el.closest('.project').dataset.project;
-  el.addEventListener('pointerenter', () => scene?.setHot(i));
-  el.addEventListener('pointerleave', () => scene?.setHot(-1));
-});
-
 /* pointer = light (desktop only) */
 if (fine && !reduced) {
   addEventListener('pointermove', (e) => scene?.pointer((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1, true), { passive: true });
@@ -156,7 +135,7 @@ function frame(t) {
   const y = scrollY, f = fAt(y);
   if (y !== lastY) { lastY = y; sync(y, f); }
   springs(dt);
-  if (scene) { scene.update(f, t); veil.style.setProperty('--veil', (scene.state.white * 0.55).toFixed(3)); }
+  if (scene) scene.update(f, t);
   requestAnimationFrame(frame);
 }
 measure();
