@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    WASIQ MUDASAR — Portfolio  •  Claude Interface Aesthetic
    Claude Orange Palette · Sidebar Layout · v3.0
    ============================================================ */
@@ -1061,7 +1061,7 @@ h1,h2,h3,h4,h5,h6 {
 .cover-dataops {
   background:
     linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 100%),
-    url('assets/images/Microservices_app.png') center / cover no-repeat;
+    url('../assets/images/Microservices_app.png') center / cover no-repeat;
 }
 
 /* ▸ Neuro Tracker — clinical blue */

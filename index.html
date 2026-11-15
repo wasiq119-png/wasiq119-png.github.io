@@ -1,888 +1,280 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wasiq Mudasar — AI Full-Stack Engineer</title>
-  <meta name="description" content="AI Full-Stack Engineer specialising in agentic systems, LLM toolchains, and production-grade full-stack development." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Wasiq Mudasar",
-    "jobTitle":"AI Full-Stack Engineer",
-    "url":"https://wasiq119-png.github.io",
-    "sameAs":[
-      "https://github.com/wasiq119-png",
-      "https://linkedin.com/in/wasiq-mudasar"
-    ]
-  }
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasiq Mudasar — AI Full-Stack Engineer</title>
+<meta name="description" content="Wasiq Mudasar, AI full-stack engineer in Ilmenau, Germany. Multi-agent pipelines, LLM-powered products and production web applications.">
+<meta name="theme-color" content="#F6F4EE">
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="preload" href="fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="js/main.js">
+<link rel="modulepreload" href="js/scene.js">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- ══════════════════════════════════════════
-     PAGE LAYOUT
-══════════════════════════════════════════ -->
-<div class="page-layout">
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
-  <!-- ───── SIDEBAR ───────────────────────── -->
-  <aside class="sidebar" id="sidebar">
-
-    <!-- Profile -->
-    <div class="sidebar-profile">
-      <div class="sidebar-avatar-wrap">
-        <div class="sidebar-avatar"><img src="assets/images/wasiq.jpg" alt="Wasiq Mudasar" /></div>
-      </div>
-      <div class="sidebar-name">Wasiq Mudasar</div>
-      <div class="sidebar-role">AI Full-Stack Engineer</div>
-      <div class="sidebar-avail">
-        <span class="avail-dot"></span>
-        Available for opportunities
-      </div>
-    </div>
-
-    <!-- Nav links -->
-    <nav class="sidebar-nav" aria-label="Main navigation">
-      <a href="#home"       class="sidebar-link active" data-section="home"><i class="fas fa-house"></i><span>Home</span></a>
-      <a href="#about"      class="sidebar-link"        data-section="about"><i class="fas fa-user"></i><span>About</span></a>
-      <a href="#skills"     class="sidebar-link"        data-section="skills"><i class="fas fa-layer-group"></i><span>Skills</span></a>
-      <a href="#experience" class="sidebar-link"        data-section="experience"><i class="fas fa-briefcase"></i><span>Experience</span></a>
-      <a href="#projects"   class="sidebar-link"        data-section="projects"><i class="fas fa-code"></i><span>Projects</span></a>
-      <a href="#contact"    class="sidebar-link"        data-section="contact"><i class="fas fa-envelope"></i><span>Contact</span></a>
-    </nav>
-
-    <!-- Spacer -->
-    <div class="sidebar-spacer"></div>
-
-    <!-- Social links -->
-    <div class="sidebar-socials">
-      <a href="https://github.com/wasiq119-png" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="mailto:wasiq119@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-    </div>
-
-    <!-- CV Download -->
-    <a href="assets/WasiqMudasar_CV.pdf" class="sidebar-cv-btn" download>
-      <i class="fas fa-download"></i>
-      <span>Download CV</span>
-    </a>
-
-    <!-- Copyright -->
-    <div class="sidebar-copy">&copy; 2025 Wasiq Mudasar</div>
-  </aside>
-
-  <!-- ───── MAIN CONTENT ───────────────────── -->
-  <main class="main-content" id="main-content">
-
-    <!-- Background FX -->
-    <canvas id="cyber-canvas" aria-hidden="true"></canvas>
-    <div class="perspective-grid" aria-hidden="true"></div>
-    <div class="bg-glow glow-1" aria-hidden="true"></div>
-    <div class="bg-glow glow-2" aria-hidden="true"></div>
-
-    <!-- ══ HERO ══════════════════════════════ -->
-    <section id="home" class="hero-section">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-label">
-            <span class="label-dot"></span>
-            <span id="typewriter" class="typewriter-text"></span>
-            <span class="typewriter-cursor">|</span>
-          </div>
-          <h1 class="hero-title">
-            Building <span class="gradient-text">Intelligent</span><br/>
-            Systems That Ship
-          </h1>
-          <p class="hero-desc">
-            AI Full-Stack Engineer crafting multi-agent pipelines, LLM-powered products,
-            and production-grade web applications. From architecture to deployment.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">
-              <i class="fas fa-rocket"></i>
-              View Projects
-            </a>
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-paper-plane"></i>
-              Get In Touch
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-num">5+</span>
-              <span class="stat-lbl">AI Projects</span>
-            </div>
-            <div class="stat-sep"></div>
-            <div class="stat-item">
-              <span class="stat-num">7</span>
-              <span class="stat-lbl">Agent Types</span>
-            </div>
-            <div class="stat-sep"></div>
-            <div class="stat-item">
-              <span class="stat-num">3+</span>
-              <span class="stat-lbl">Years Building</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ ABOUT ══════════════════════════════ -->
-    <section id="about" class="section hidden">
-      <div class="container">
-        <div class="section-label">About Me</div>
-        <div class="about-grid">
-
-          <!-- Left: bio -->
-          <div class="about-bio glass-card">
-            <h2 class="section-title">The Engineer Behind the Systems</h2>
-            <p>
-              I'm an AI Full-Stack Engineer who bridges the gap between cutting-edge AI research
-              and real-world product delivery. My work spans multi-agent orchestration, LLM fine-tuning,
-              and scalable backend infrastructure.
-            </p>
-            <p style="margin-top:1rem;">
-              I specialise in building systems where AI isn't a feature bolt-on — it's the core
-              architecture. Whether it's a 7-agent software house that generates websites autonomously
-              or a CV analyser that scores job-match in real time, I ship products that work.
-            </p>
-            <div class="about-tags">
-              <span class="about-tag">Multi-Agent Systems</span>
-              <span class="about-tag">LLM Pipelines</span>
-              <span class="about-tag">Full-Stack Dev</span>
-              <span class="about-tag">Cloud Architecture</span>
-            </div>
-          </div>
-
-          <!-- Right: education + certifications + quick-facts -->
-          <div class="about-side">
-
-            <div class="about-side-label">Education</div>
-            <div class="edu-card glass-card">
-              <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-              <div class="edu-body">
-                <div class="edu-degree">M.Sc. Media Engineering</div>
-                <div class="edu-school">Technische Universität Ilmenau — Germany</div>
-                <div class="edu-period">Apr 2024 – Present</div>
-                <div class="edu-desc">Focus on AI-driven media systems, generative models, and intelligent content pipelines.</div>
-              </div>
-            </div>
-            <div class="edu-card glass-card" style="margin-top:0.65rem;">
-              <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-              <div class="edu-body">
-                <div class="edu-degree">B.Sc. Computer Science</div>
-                <div class="edu-school">IQRA University — Karachi, Pakistan</div>
-                <div class="edu-period">Jan 2018 – Aug 2022</div>
-              </div>
-            </div>
-
-            <div class="about-side-label" style="margin-top:1rem;">Certifications</div>
-            <div class="glass-card cert-card">
-              <div class="cert-item">
-                <i class="fas fa-wand-magic-sparkles cert-icon"></i>
-                <div class="cert-body">
-                  <div class="cert-name">Introduction to Generative AI</div>
-                  <div class="cert-issuer">Google · LinkedIn Learning</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="about-side-label" style="margin-top:1rem;">Quick Facts</div>
-            <div class="glass-card about-facts">
-              <div class="fact-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Ilmenau, Germany</span>
-              </div>
-              <div class="fact-row">
-                <i class="fas fa-language"></i>
-                <span>English C1 · Urdu (Native) · German B1</span>
-              </div>
-              <div class="fact-row">
-                <i class="fas fa-clock"></i>
-                <span>CET / CEST (UTC+1 / UTC+2)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ SKILLS ══════════════════════════════ -->
-    <section id="skills" class="section hidden">
-      <div class="container">
-        <div class="section-label">Tech Stack</div>
-        <h2 class="section-title">Skills &amp; Tools</h2>
-        <div class="skills-grid">
-
-          <div class="skill-item">
-            <i class="fab fa-react skill-brand-react"></i>
-            <span>React</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-node-js skill-brand-node"></i>
-            <span>Node.js</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-python skill-brand-python"></i>
-            <span>Python</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-java skill-brand-java"></i>
-            <span>Java</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-database skill-brand-db"></i>
-            <span>PostgreSQL</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-docker skill-brand-docker"></i>
-            <span>Docker</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-aws skill-brand-aws"></i>
-            <span>AWS</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-brain skill-brand-ai"></i>
-            <span>LangChain</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-robot skill-brand-ai"></i>
-            <span>Multi-Agent AI</span>
-          </div>
-          <div class="skill-item">
-            <i class="fab fa-js skill-brand-js"></i>
-            <span>TypeScript</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-server skill-brand-db"></i>
-            <span>Spring Boot</span>
-          </div>
-          <div class="skill-item">
-            <i class="fas fa-cube skill-brand-ai"></i>
-            <span>Next.js</span>
-          </div>
-          <!-- 13th skill: LinkedIn badge -->
-          <div class="skill-item">
-            <i class="fas fa-wand-magic-sparkles skill-brand-ai"></i>
-            <span>Intro to Generative AI</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ EXPERIENCE ══════════════════════════ -->
-    <section id="experience" class="section hidden">
-      <div class="container">
-        <div class="section-label">Work History</div>
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-
-          <div class="timeline-item glass-card">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-role">Java Developer Intern (Full-Stack)</div>
-                <div class="timeline-company"><i class="fas fa-building"></i>Inseyab Consulting &amp; Info Solutions — Pakistan (Remote)</div>
-              </div>
-              <div class="timeline-period">Feb 2023 – Sep 2023</div>
-            </div>
-            <p class="timeline-desc">
-              Integrated TypeScript/Angular Material frontends with Spring Boot REST APIs, reducing
-              manual data-handling steps by 35%. Refactored legacy monolithic codebase, cutting
-              runtime error rate by 45%.
-            </p>
-            <div class="timeline-tags">
-              <span class="tech-tag">Java</span>
-              <span class="tech-tag">Spring Boot</span>
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Angular Material</span>
-              <span class="tech-tag">REST APIs</span>
-            </div>
-          </div>
-
-          <div class="timeline-item glass-card">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-role">Mobile Application Developer (Internship)</div>
-                <div class="timeline-company"><i class="fas fa-mobile-alt"></i>The Techvein (Pvt.) Ltd. — Pakistan</div>
-              </div>
-              <div class="timeline-period">Jun 2022 – Sep 2022</div>
-            </div>
-            <p class="timeline-desc">
-              Delivered all mobile modules 15% ahead of sprint deadlines. Received a 5/5 rating
-              on the formal evaluation.
-            </p>
-            <div class="timeline-tags">
-              <span class="tech-tag">Mobile Development</span>
-              <span class="tech-tag">Sprint Delivery</span>
-              <span class="tech-tag">Agile</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ PROJECTS ══════════════════════════ -->
-    <section id="projects" class="section hidden">
-      <div class="container">
-        <div class="projects-header">
-          <div>
-            <div class="section-label">Portfolio</div>
-            <h2 class="section-title">Projects</h2>
-          </div>
-          <div class="filter-row">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="ai">AI</button>
-            <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
-            <button class="filter-btn" data-filter="research">Research</button>
-          </div>
-        </div>
-
-        <div class="projects-scroller" id="projects-scroller">
-
-          <!-- ── 1. AI Software House ─────────── -->
-          <div class="project-card" data-category="ai">
-            <div class="project-cover cover-aisoftware">
-              <span class="cover-kicker">Multi-Agent</span>
-              <h3>AI Software<br/>House</h3>
-              <div class="project-status-indicator in-progress"></div>
-
-              <!-- Cover art -->
-              <div class="cover-art-aisoftware">
-                <!-- IDE window -->
-                <div class="aisw-ide">
-                  <div class="aisw-ide-bar">
-                    <span class="aisw-dot aisw-dot-r"></span>
-                    <span class="aisw-dot aisw-dot-y"></span>
-                    <span class="aisw-dot aisw-dot-g"></span>
-                    <span class="aisw-fname">generated_site.jsx</span>
-                  </div>
-                  <div class="aisw-code">
-                    <span><span class="code-kw">const</span> <span class="code-fn">HeroSection</span> = () =&gt; (</span>
-                    <span class="code-ind"><span class="code-tag">&lt;section</span> className=<span class="code-str">"hero"</span><span class="code-tag">&gt;</span></span>
-                    <span class="code-ind">&nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span><span class="code-str">AI-Generated</span><span class="code-tag">&lt;/h1&gt;</span></span>
-                    <span class="code-ind"><span class="code-tag">&lt;/section&gt;</span></span>
-                    <span>)</span>
-                  </div>
-                </div>
-                <!-- Agent pipeline -->
-                <div class="aisw-pipeline-bar">
-                  <span class="agent-chip mgr">🧠 Manager</span>
-                  <span class="pipeline-sep">→</span>
-                  <span class="agent-chip dsn">🎨 Designer</span>
-                  <span class="pipeline-sep">→</span>
-                  <span class="agent-chip dev">💻 Dev</span>
-                  <span class="pipeline-sep">→</span>
-                  <span class="agent-chip qa">✅ QA</span>
-                </div>
-                <div class="aisw-metric">7 agents · 13,751 tokens → website</div>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-title">AI Software House</span>
-                <span class="project-status-badge in-progress">Building</span>
-              </div>
-              <p class="project-desc">
-                Autonomous 7-agent system that generates full websites from a single prompt.
-                Manager orchestrates Designer, Dev, QA and Deploy agents in a live pipeline.
-              </p>
-              <div class="project-tags">
-                <span class="tech-tag">LangChain</span>
-                <span class="tech-tag">GPT-4o</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Multi-Agent</span>
-              </div>
-              <div class="project-actions">
-                <button class="project-btn primary" onclick="openModal('modal-aisoftware')">
-                  <i class="fas fa-info-circle"></i> Details
-                </button>
-                <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── 2. StellenPortal Deutschland ── -->
-          <div class="project-card" data-category="fullstack">
-            <div class="project-cover cover-stellenportal">
-              <span class="cover-kicker">Job Portal</span>
-              <h3>Stellen<br/>Portal DE</h3>
-              <div class="project-status-indicator in-progress"></div>
-
-              <!-- Cover art -->
-              <div class="cover-art-stellenportal">
-                <div class="sp-portal-ui">
-                  <div class="sp-portal-nav">
-                    <span class="sp-logo">StellenPortal<span class="sp-de-badge">DE</span></span>
-                    <span style="font-size:0.6rem;color:rgba(147,197,253,0.5);font-family:var(--font-heading);">Jobs in Germany</span>
-                  </div>
-                  <div class="sp-portal-search">
-                    <i class="fas fa-search"></i>
-                    <span>Software Engineer, Berlin…</span>
-                  </div>
-                  <div class="sp-portal-jobs">
-                    <div class="sp-job-row">
-                      <span class="sp-job-title">Senior React Dev</span>
-                      <span class="sp-job-loc">🏙 Berlin</span>
-                    </div>
-                    <div class="sp-job-row">
-                      <span class="sp-job-title">AI Engineer</span>
-                      <span class="sp-job-loc">🏙 München</span>
-                    </div>
-                    <div class="sp-job-row">
-                      <span class="sp-job-title">Backend Java</span>
-                      <span class="sp-job-loc">🏙 Hamburg</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="sp-tech-row">
-                  <span class="sp-tech-pill">Next.js</span>
-                  <span class="sp-tech-pill">Three.js</span>
-                  <span class="sp-tech-pill">Prisma</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-title">StellenPortal Deutschland</span>
-                <span class="project-status-badge in-progress">Building</span>
-              </div>
-              <p class="project-desc">
-                Full-stack German job portal with 3D UI, semantic job search, employer dashboards,
-                and AI-powered candidate matching. Built for the DACH market.
-              </p>
-              <div class="project-tags">
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">Three.js</span>
-                <span class="tech-tag">Prisma</span>
-                <span class="tech-tag">PostgreSQL</span>
-              </div>
-              <div class="project-actions">
-                <button class="project-btn primary" onclick="openModal('modal-stellenportal')">
-                  <i class="fas fa-info-circle"></i> Details
-                </button>
-                <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── 3. AI Job Assistant ───────────── -->
-          <div class="project-card" data-category="ai">
-            <div class="project-cover cover-aijob">
-              <span class="cover-kicker">AI Tool · Live</span>
-              <h3>AI Job<br/>Assistant</h3>
-              <div class="project-status-indicator live"></div>
-
-              <!-- Cover art -->
-              <div class="cover-art-aijob">
-                <!-- CV keywords panel -->
-                <div class="aijob-cv-panel">
-                  <div class="aijob-cv-label">CV Keywords</div>
-                  <div class="aijob-kw-row match">React <span class="kw-check">✓</span></div>
-                  <div class="aijob-kw-row match">TypeScript <span class="kw-check">✓</span></div>
-                  <div class="aijob-kw-row match">Spring Boot <span class="kw-check">✓</span></div>
-                  <div class="aijob-kw-row match">Groq LLM <span class="kw-check">✓</span></div>
-                  <div class="aijob-kw-row">Kubernetes</div>
-                </div>
-                <!-- Score ring -->
-                <div class="aijob-score-panel">
-                  <div class="score-ring-outer">
-                    <div class="score-ring-inner">
-                      <span class="score-num">94%</span>
-                      <span class="score-sub">Match</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- LIVE badge -->
-              <div class="live-prod-badge">
-                <span class="live-dot"></span>
-                LIVE
-              </div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-title">AI Job Assistant</span>
-                <span class="project-status-badge live">Live</span>
-              </div>
-              <p class="project-desc">
-                Full-stack AI tool that parses CVs, extracts keyword matches and generates a
-                real-time job-fit score with tailored cover letters via Groq LLM.
-              </p>
-              <div class="project-tags">
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">Spring Boot</span>
-                <span class="tech-tag">Groq LLM</span>
-                <span class="tech-tag">PostgreSQL</span>
-              </div>
-              <div class="project-actions">
-                <button class="project-btn primary" onclick="openModal('modal-aijob')">
-                  <i class="fas fa-info-circle"></i> Details
-                </button>
-                <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── 4. DataOps Microservices ──────── -->
-          <div class="project-card" data-category="fullstack">
-            <div class="project-cover cover-dataops">
-              <span class="cover-kicker">Architecture</span>
-              <h3>DataOps<br/>Platform</h3>
-              <div class="project-status-indicator academic"></div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-title">DataOps Microservices</span>
-                <span class="project-status-badge academic">Academic</span>
-              </div>
-              <p class="project-desc">
-                Event-driven microservices platform with Kafka message bus, Prometheus monitoring,
-                and auto-scaling Docker Swarm deployment for real-time data pipelines.
-              </p>
-              <div class="project-tags">
-                <span class="tech-tag">Kafka</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Spring Boot</span>
-                <span class="tech-tag">Prometheus</span>
-              </div>
-              <div class="project-actions">
-                <button class="project-btn primary" onclick="openModal('modal-dataops')">
-                  <i class="fas fa-info-circle"></i> Details
-                </button>
-                <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-                  <i class="fab fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── 5. Neuro Tracker ──────────────── -->
-          <div class="project-card" data-category="research">
-            <div class="project-cover cover-neuro">
-              <span class="cover-kicker">Research · EEG</span>
-              <h3>Neuro<br/>Tracker</h3>
-              <div class="project-status-indicator academic"></div>
-
-              <!-- Cover art -->
-              <div class="cover-art-neuro">
-                <div class="neuro-screen">
-                  <div class="neuro-screen-bar">
-                    <span class="neuro-screen-title">EEG Live Monitor</span>
-                    <span class="neuro-rec-badge">● REC</span>
-                  </div>
-                  <div class="neuro-eeg-container">
-                    <!-- Inline SVG EEG waveform -->
-                    <svg class="neuro-eeg-svg" viewBox="0 0 320 42" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                      <polyline
-                        points="0,21 10,21 15,8 20,34 25,21 40,21 45,15 50,27 55,21 70,21 75,5 78,38 81,5 84,21 100,21 105,16 110,26 115,21 130,21 135,10 140,32 145,21 160,21 165,14 170,28 175,21 190,21 195,7 198,36 201,7 204,21 220,21 225,17 230,25 235,21 250,21 255,11 260,31 265,21 280,21 285,13 290,29 295,21 310,21 320,21"
-                        fill="none"
-                        stroke="rgba(96,165,250,0.8)"
-                        stroke-width="1.5"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                      />
-                      <polyline
-                        points="0,28 20,28 25,24 30,32 35,28 55,28 60,22 65,34 70,28 90,28 95,21 98,36 101,21 105,28 125,28 130,24 135,32 140,28 160,28 165,23 170,33 175,28 195,28 200,20 203,37 206,20 210,28 230,28 235,25 240,31 245,28 265,28 270,22 275,34 280,28 300,28 305,24 310,32 315,28 320,28"
-                        fill="none"
-                        stroke="rgba(167,139,250,0.5)"
-                        stroke-width="1"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <div class="neuro-band-labels">
-                    <span class="neuro-band-lbl">α Alpha</span>
-                    <span class="neuro-band-lbl">β Beta</span>
-                    <span class="neuro-band-lbl">γ Gamma</span>
-                  </div>
-                </div>
-                <div class="neuro-badges-row">
-                  <span class="neuro-badge">GDPR</span>
-                  <span class="neuro-badge">Consent Form</span>
-                  <span class="neuro-badge">Clinical</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="project-body">
-              <div class="project-meta">
-                <span class="project-title">Neuro Tracker</span>
-                <span class="project-status-badge academic">Research</span>
-              </div>
-              <p class="project-desc">
-                GDPR-compliant EEG data platform for clinical cognitive research. Real-time
-                brainwave monitoring, consent management, and secure data export.
-              </p>
-              <div class="project-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">EEG</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">GDPR</span>
-              </div>
-              <div class="project-actions">
-                <button class="project-btn primary" onclick="openModal('modal-neuro')">
-                  <i class="fas fa-info-circle"></i> Details
-                </button>
-              </div>
-            </div>
-          </div>
-
-        </div><!-- /projects-scroller -->
-      </div>
-    </section>
-
-    <!-- ══ CONTACT ══════════════════════════ -->
-    <section id="contact" class="section hidden">
-      <div class="container">
-        <div class="section-label">Get in Touch</div>
-        <h2 class="section-title">Let's Build Something</h2>
-        <div class="contact-grid">
-
-          <div class="contact-info">
-            <a href="mailto:wasiq119@gmail.com" class="contact-item">
-              <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <div class="contact-item-label">Email</div>
-                <div class="contact-item-value">wasiq119@gmail.com</div>
-              </div>
-            </a>
-            <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" rel="noopener" class="contact-item">
-              <div class="contact-item-icon"><i class="fab fa-linkedin-in"></i></div>
-              <div>
-                <div class="contact-item-label">LinkedIn</div>
-                <div class="contact-item-value">wasiq-mudasar</div>
-              </div>
-            </a>
-            <a href="https://github.com/wasiq119-png" target="_blank" rel="noopener" class="contact-item">
-              <div class="contact-item-icon"><i class="fab fa-github"></i></div>
-              <div>
-                <div class="contact-item-label">GitHub</div>
-                <div class="contact-item-value">wasiq119-png</div>
-              </div>
-            </a>
-          </div>
-
-          <div class="contact-cta-card glass-card">
-            <h3>Open to Collaborations</h3>
-            <p>
-              Whether you're building an AI product, need a technical co-founder,
-              or want to explore a research collaboration — I'm open to conversations.
-            </p>
-            <a href="mailto:wasiq119@gmail.com" class="btn btn-primary">
-              <i class="fas fa-paper-plane"></i>
-              Send a Message
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ FOOTER ══════════════════════════ -->
-    <footer>
-      <div class="container">
-        <div class="footer-text">
-          Built with <span style="color:var(--accent-1);">&#9829;</span> by
-          <a href="#home">Wasiq Mudasar</a> &mdash; 2025
-        </div>
-        <div class="footer-links">
-          <a href="https://github.com/wasiq119-png" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="mailto:wasiq119@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
-    </footer>
-
-  </main><!-- /main-content -->
-</div><!-- /page-layout -->
-
-<!-- ══ MOBILE NAV ════════════════════════ -->
-<nav class="mobile-nav" aria-label="Mobile navigation">
-  <a href="#home"       class="mobile-nav-item active" aria-label="Home"><i class="fas fa-house"></i></a>
-  <a href="#about"      class="mobile-nav-item"        aria-label="About"><i class="fas fa-user"></i></a>
-  <a href="#skills"     class="mobile-nav-item"        aria-label="Skills"><i class="fas fa-layer-group"></i></a>
-  <a href="#experience" class="mobile-nav-item"        aria-label="Experience"><i class="fas fa-briefcase"></i></a>
-  <a href="#projects"   class="mobile-nav-item"        aria-label="Projects"><i class="fas fa-code"></i></a>
-  <a href="#contact"    class="mobile-nav-item"        aria-label="Contact"><i class="fas fa-envelope"></i></a>
-</nav>
-
-<!-- ══ MODALS ════════════════════════════ -->
-
-<!-- AI Software House -->
-<div class="modal-overlay" id="modal-aisoftware" onclick="closeModalOverlay(event,'modal-aisoftware')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-aisoftware')" aria-label="Close"><i class="fas fa-times"></i></button>
-    <div class="modal-cover modal-cover-aisoftware">
-      <span class="modal-cover-emoji">🏗️</span>
-      <div class="modal-cover-title">AI Software House</div>
-    </div>
-    <div class="modal-content">
-      <h4>Overview</h4>
-      <p>A fully autonomous 7-agent system that generates complete websites from a single natural-language prompt. The Manager agent decomposes the task and dispatches Designer, Developer, QA, SEO, Security, and Deploy agents in a coordinated pipeline.</p>
-      <h4>How It Works</h4>
-      <p>Each agent operates on a specialised context window. The Manager orchestrates via function-calling, the Designer produces wireframes, the Developer writes JSX, the QA agent runs automated tests, and the Deploy agent pushes to a live CDN — all in one pass averaging 13,751 tokens.</p>
-      <h4>Tech Stack</h4>
-      <div class="modal-tags">
-        <span class="tech-tag">LangChain</span>
-        <span class="tech-tag">GPT-4o</span>
-        <span class="tech-tag">React</span>
-        <span class="tech-tag">Vite</span>
-        <span class="tech-tag">Node.js</span>
-        <span class="tech-tag">Multi-Agent</span>
-        <span class="tech-tag">Function Calling</span>
-      </div>
-      <div class="modal-links">
-        <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <p class="loader-name">Wasiq <span>/</span> <span id="loader-state">System initializing</span></p>
+  <div class="loader-line"><i></i></div>
 </div>
 
-<!-- StellenPortal -->
-<div class="modal-overlay" id="modal-stellenportal" onclick="closeModalOverlay(event,'modal-stellenportal')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-stellenportal')" aria-label="Close"><i class="fas fa-times"></i></button>
-    <div class="modal-cover modal-cover-stellenportal">
-      <span class="modal-cover-emoji">🇩🇪</span>
-      <div class="modal-cover-title">StellenPortal Deutschland</div>
-    </div>
-    <div class="modal-content">
-      <h4>Overview</h4>
-      <p>A modern German job portal targeting the DACH employment market. Features semantic job search, employer dashboards, CV parsing, and AI-powered candidate-to-job matching.</p>
-      <h4>Key Features</h4>
-      <p>3D hero built with Three.js, server-side rendering via Next.js for SEO, Prisma ORM with PostgreSQL, JWT authentication, and real-time notifications via WebSockets.</p>
-      <h4>Tech Stack</h4>
-      <div class="modal-tags">
-        <span class="tech-tag">Next.js</span>
-        <span class="tech-tag">Three.js</span>
-        <span class="tech-tag">Prisma</span>
-        <span class="tech-tag">PostgreSQL</span>
-        <span class="tech-tag">TypeScript</span>
-        <span class="tech-tag">Tailwind CSS</span>
-      </div>
-      <div class="modal-links">
-        <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Wasiq Mudasar, back to top">WASIQ.</a>
+  <nav aria-label="Primary">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#system">System</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links"><span>Menu</span></button>
+</header>
+
+<aside class="status" id="status" aria-hidden="true">
+  <span class="status-dot"></span>
+  <span class="status-label">System</span>
+  <span class="status-slash">/</span>
+  <span class="status-state"><b id="status-state">Idle</b></span>
+</aside>
+
+<main id="main">
+
+<!-- ───────── HERO ───────── -->
+<section class="hero" id="top" data-cam="hero" data-state="Idle">
+  <p class="meta hero-meta">Wasiq Mudasar<br>AI Full-Stack Engineer<br>Ilmenau / Germany</p>
+  <h1 class="hero-title" id="hero-title" aria-label="Building intelligent systems that ship.">
+    <span class="line" aria-hidden="true"><span class="line-in">Building</span></span>
+    <span class="line" aria-hidden="true"><span class="line-in">Intelligent</span></span>
+    <span class="line" aria-hidden="true"><span class="line-in">Systems</span></span>
+    <span class="line" aria-hidden="true"><span class="line-in">That ship.</span></span>
+  </h1>
+  <div class="hero-foot">
+    <p class="hero-sub">Multi-agent pipelines, LLM-powered products and production web applications. From architecture to deployment.</p>
+    <a class="btn" href="#work" data-magnetic><span>View work</span></a>
+    <p class="meta hero-avail">Available for opportunities</p>
+  </div>
+</section>
+
+<!-- ───────── ABOUT ───────── -->
+<section class="about" id="about" data-cam="about" data-state="Reading">
+  <h2 class="statement" data-reveal>
+    <span class="line"><span class="line-in">I build systems</span></span>
+    <span class="line"><span class="line-in">where AI,</span></span>
+    <span class="line"><span class="line-in">software and</span></span>
+    <span class="line"><span class="line-in">product meet.</span></span>
+  </h2>
+  <div class="about-side">
+    <figure class="portrait" data-slice>
+      <img src="assets/images/wasiq.jpg" alt="Portrait of Wasiq Mudasar" width="320" height="400" loading="lazy">
+    </figure>
+    <div class="about-text" data-reveal>
+      <p>I am an AI full-stack engineer based in Ilmenau. I build products where the model is part of the architecture, not something added at the end: agent pipelines, LLM-backed features and the web applications around them.</p>
+      <p>I am studying for an M.Sc. in Media Engineering at TU Ilmenau. Before that I worked with Spring Boot and Angular in a consulting team, and in mobile development.</p>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Ilmenau, Germany</dd></div>
+        <div><dt>Languages</dt><dd>English C1, German B1, Urdu native</dd></div>
+        <div><dt>Time zone</dt><dd>CET / CEST</dd></div>
+      </dl>
     </div>
   </div>
-</div>
+</section>
 
-<!-- AI Job Assistant -->
-<div class="modal-overlay" id="modal-aijob" onclick="closeModalOverlay(event,'modal-aijob')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-aijob')" aria-label="Close"><i class="fas fa-times"></i></button>
-    <div class="modal-cover modal-cover-aijob">
-      <span class="modal-cover-emoji">🤖</span>
-      <div class="modal-cover-title">AI Job Assistant</div>
+<!-- ───────── HOW I THINK ───────── -->
+<section class="think" id="think" data-state="Traversing" aria-labelledby="think-h">
+  <i class="mark" data-cam="p1" style="top:12.5%"></i>
+  <i class="mark" data-cam="p2" style="top:37.5%"></i>
+  <i class="mark" data-cam="p3" style="top:62.5%"></i>
+  <i class="mark" data-cam="p4" style="top:87.5%"></i>
+  <div class="think-stage">
+    <p class="meta" id="think-h">How I think</p>
+    <ol class="principles" id="principles">
+      <li class="principle"><span class="p-num">01</span><h3>Think in<br>systems</h3><p>A feature is one room. I start from the building it has to stand in.</p></li>
+      <li class="principle"><span class="p-num">02</span><h3>Build for<br>real use</h3><p>It counts when someone can open it and use it.</p></li>
+      <li class="principle"><span class="p-num">03</span><h3>Connect<br>the layers</h3><p>Interface, service, model and data are designed together.</p></li>
+      <li class="principle"><span class="p-num">04</span><h3>Ship</h3><p>Then move forward.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ───────── WORK ───────── -->
+<section class="work" id="work" data-state="Processing" aria-labelledby="work-h">
+  <header class="work-head" data-cam="gate">
+    <p class="meta">Selected work, five projects</p>
+    <h2 id="work-h" class="display" data-reveal><span class="line"><span class="line-in">Work</span></span></h2>
+  </header>
+
+  <article class="project" data-cam="w1" data-project="0">
+    <div class="project-body">
+      <p class="meta"><b>01</b> AI / Multi-agent systems <em>In development</em></p>
+      <h3 class="project-title">AI Software<br>House</h3>
+      <p class="project-concept">A client brief goes in. A planned, built and reviewed website comes out.</p>
+      <p class="project-desc">A manager agent plans the work, specialist agents design and build the pages and backend, and a QA agent reviews and sends work back for revision. Lessons from failed runs feed into later prompts, and the client follows along in a live preview.</p>
+      <ul class="tech"><li>Next.js</li><li>TypeScript</li><li>Tailwind CSS</li><li>Prisma</li><li>PostgreSQL</li><li>Groq</li></ul>
+      <p class="project-link"><span class="muted">Private repository</span></p>
     </div>
-    <div class="modal-content">
-      <h4>Overview</h4>
-      <p>A live production tool that analyses CVs against job descriptions, extracts keyword matches, computes a semantic fit score (0–100%), and generates personalised cover letters using Groq LLM.</p>
-      <h4>Architecture</h4>
-      <p>React frontend communicates with a Spring Boot backend. CV text is parsed, vectorised, and compared against job description embeddings. Groq's low-latency API powers the cover letter generation in under 2 seconds.</p>
-      <h4>Tech Stack</h4>
-      <div class="modal-tags">
-        <span class="tech-tag">React</span>
-        <span class="tech-tag">Spring Boot</span>
-        <span class="tech-tag">Groq LLM</span>
-        <span class="tech-tag">PostgreSQL</span>
-        <span class="tech-tag">Java</span>
-        <span class="tech-tag">Docker</span>
+  </article>
+
+  <article class="project" data-cam="w2" data-project="1">
+    <div class="project-body">
+      <p class="meta"><b>02</b> Full-stack / Job platform <em>In development</em></p>
+      <h3 class="project-title">StellenPortal<br>Deutschland</h3>
+      <p class="project-concept">A German-language job portal with a side for candidates and a side for employers.</p>
+      <p class="project-desc">Job and company listings, candidate and employer dashboards, a salary calculator and the legal pages the German market expects, across more than twenty routes. The 3D hero is lazy-loaded and switched off on small screens. It currently runs on mock data.</p>
+      <ul class="tech"><li>Next.js</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li><li>React Three Fiber</li><li>GSAP</li></ul>
+      <p class="project-link"><a href="https://github.com/wasiq119-png" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </article>
+
+  <article class="project" data-cam="w3" data-project="2">
+    <div class="project-body">
+      <p class="meta"><b>03</b> AI / Full-stack product <em>Live</em></p>
+      <h3 class="project-title">AI Job<br>Assistant</h3>
+      <p class="project-concept">A CV becomes structured data that can be measured against a job description.</p>
+      <p class="project-desc">It reads a CV as PDF or Word, including hidden links, and scores the share of required skills it covers. The score is computed in Java, not guessed by the model. It then drafts a tailored cover letter and searches live German job listings.</p>
+      <ul class="tech"><li>Spring Boot</li><li>Spring AI</li><li>Groq</li><li>React</li><li>PostgreSQL</li><li>Docker</li></ul>
+      <p class="project-link"><a href="https://ai-job-assistant-zeta.vercel.app" target="_blank" rel="noopener">Open the app</a><a href="https://github.com/wasiq119-png/ai-job-assistant" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </article>
+
+  <article class="project" data-cam="w4" data-project="3">
+    <div class="project-body">
+      <p class="meta"><b>04</b> Backend / Microservices <em>Completed</em></p>
+      <h3 class="project-title">DataOps<br>Framework</h3>
+      <p class="project-concept">Independent services that find each other, share load and report on themselves.</p>
+      <p class="project-desc">A microservices framework for data-intensive applications, with service discovery and load balancing, automatic scaling, and monitoring with alerts.</p>
+      <ul class="tech"><li>TypeScript</li><li>Node.js</li><li>Docker</li><li>Sequelize</li><li>Kubernetes</li></ul>
+      <p class="project-link"><a href="https://github.com/wasiq119-png" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </article>
+
+  <article class="project" data-cam="w5" data-project="4">
+    <div class="project-body">
+      <p class="meta"><b>05</b> Mobile / Healthcare <em>B.Sc. capstone</em></p>
+      <h3 class="project-title">Neuro<br>Tracker</h3>
+      <p class="project-concept">Scattered symptoms resolve into a clear screening result.</p>
+      <p class="project-desc">An offline Android app that screens for symptoms of Guillain-Barré Syndrome with a logic-based algorithm. It was built for under-served rural regions and connects patients with registered doctors.</p>
+      <ul class="tech"><li>Java</li><li>Android SDK</li><li>SQLite</li><li>XML layouts</li></ul>
+    </div>
+  </article>
+</section>
+
+<!-- ───────── THE STACK ───────── -->
+<section class="system" id="system" data-cam="stack" data-state="Mapped" aria-labelledby="system-h">
+  <div class="system-stage">
+  <div class="system-head">
+    <p class="meta">Hover a technology to see where it is used</p>
+    <h2 id="system-h" class="display" data-reveal><span class="line"><span class="line-in">The stack</span></span></h2>
+  </div>
+  <div class="layers" id="layers">
+    <div class="layer" data-tier="3"><h3>Interface</h3><ul>
+      <li><button type="button" data-tech="React">React</button></li>
+      <li><button type="button" data-tech="Next.js">Next.js</button></li>
+      <li><button type="button" data-tech="TypeScript">TypeScript</button></li>
+      <li><button type="button" data-tech="Angular">Angular</button></li>
+      <li><button type="button" data-tech="Three.js">Three.js</button></li>
+      <li><button type="button" data-tech="Tailwind CSS">Tailwind CSS</button></li>
+    </ul></div>
+    <div class="layer" data-tier="2"><h3>Intelligence</h3><ul>
+      <li><button type="button" data-tech="Multi-agent systems">Multi-agent systems</button></li>
+      <li><button type="button" data-tech="Groq LLMs">Groq LLMs</button></li>
+      <li><button type="button" data-tech="Spring AI">Spring AI</button></li>
+    </ul></div>
+    <div class="layer" data-tier="1"><h3>Services</h3><ul>
+      <li><button type="button" data-tech="Java">Java</button></li>
+      <li><button type="button" data-tech="Spring Boot">Spring Boot</button></li>
+      <li><button type="button" data-tech="Node.js">Node.js</button></li>
+      <li><button type="button" data-tech="REST APIs">REST APIs</button></li>
+    </ul></div>
+    <div class="layer" data-tier="0"><h3>Foundation</h3><ul>
+      <li><button type="button" data-tech="PostgreSQL">PostgreSQL</button></li>
+      <li><button type="button" data-tech="Prisma">Prisma</button></li>
+      <li><button type="button" data-tech="SQLite">SQLite</button></li>
+      <li><button type="button" data-tech="Docker">Docker</button></li>
+      <li><button type="button" data-tech="Kubernetes">Kubernetes</button></li>
+    </ul></div>
+  </div>
+  <p class="system-note" id="system-note" aria-live="polite">&nbsp;</p>
+  </div>
+</section>
+
+<!-- ───────── EXPERIENCE ───────── -->
+<section class="path" id="path" data-cam="exp" data-state="Tracing" aria-labelledby="path-h">
+  <p class="meta" id="path-h">Experience</p>
+  <ol class="timeline" id="timeline">
+    <li class="role" data-reveal>
+      <p class="role-date">Feb – Sep<br>2023</p>
+      <div>
+        <p class="meta">Inseyab Consulting &amp; Info Solutions, Pakistan, remote</p>
+        <h3>Java Developer Intern, full-stack</h3>
+        <p>Integrated TypeScript and Angular Material frontends with Spring Boot REST APIs, reducing manual data-handling steps by 35%. Refactored a legacy monolithic codebase, cutting the runtime error rate by 45%.</p>
+        <p class="project-link"><a href="assets/images/Inseyab%20Certification_page-0001.jpg" target="_blank" rel="noopener">View certificate</a></p>
       </div>
-      <div class="modal-links">
-        <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-          <i class="fab fa-github"></i> GitHub
-        </a>
+    </li>
+    <li class="role" data-reveal>
+      <p class="role-date">Jun – Sep<br>2022</p>
+      <div>
+        <p class="meta">The Techvein (Pvt.) Ltd., Pakistan</p>
+        <h3>Mobile Application Developer, internship</h3>
+        <p>Delivered all mobile modules 15% ahead of sprint deadlines and received 5/5 on the formal evaluation.</p>
+        <p class="project-link"><a href="assets/images/TV%20x%20Internship%20Certificate_page-0001.jpg" target="_blank" rel="noopener">View certificate</a></p>
       </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ───────── EDUCATION ───────── -->
+<section class="edu" id="education" data-cam="edu" data-state="Tracing" aria-labelledby="edu-h">
+  <p class="meta" id="edu-h">Education</p>
+  <div class="edu-list">
+    <div class="edu-item" data-reveal>
+      <h3>M.Sc. Media Engineering</h3>
+      <p>Technische Universität Ilmenau</p>
+      <p class="meta">Apr 2024 – present</p>
+    </div>
+    <div class="edu-item" data-reveal>
+      <h3>B.Sc. Computer Science</h3>
+      <p>IQRA University, Karachi</p>
+      <p class="meta">Jan 2018 – Aug 2022</p>
+    </div>
+    <div class="edu-item small" data-reveal>
+      <h3>Introduction to Generative AI</h3>
+      <p>Google, LinkedIn skill badge</p>
+      <p class="meta">Certification</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- DataOps -->
-<div class="modal-overlay" id="modal-dataops" onclick="closeModalOverlay(event,'modal-dataops')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-dataops')" aria-label="Close"><i class="fas fa-times"></i></button>
-    <div class="modal-cover modal-cover-dataops">
-      <span class="modal-cover-emoji">⚙️</span>
-      <div class="modal-cover-title">DataOps Microservices</div>
-    </div>
-    <div class="modal-content">
-      <h4>Overview</h4>
-      <p>An event-driven microservices architecture for real-time data pipeline processing. Features Kafka message brokering, Prometheus + Grafana observability, and Docker Swarm orchestration.</p>
-      <h4>Architecture</h4>
-      <p>Six independent Spring Boot services communicate via Kafka topics. Each service has its own PostgreSQL schema. Prometheus scrapes metrics, Grafana visualises them. Docker Swarm handles rolling deploys and auto-scaling.</p>
-      <h4>Tech Stack</h4>
-      <div class="modal-tags">
-        <span class="tech-tag">Kafka</span>
-        <span class="tech-tag">Spring Boot</span>
-        <span class="tech-tag">Docker Swarm</span>
-        <span class="tech-tag">Prometheus</span>
-        <span class="tech-tag">Grafana</span>
-        <span class="tech-tag">PostgreSQL</span>
-      </div>
-      <div class="modal-links">
-        <a href="https://github.com/wasiq119-png" target="_blank" class="project-btn">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-      </div>
-    </div>
+<!-- ───────── CONTACT ───────── -->
+<section class="contact" id="contact" data-cam="exit" data-state="Ready" aria-labelledby="contact-h">
+  <h2 id="contact-h" class="contact-title" data-reveal>
+    <span class="line"><span class="line-in">Let’s</span></span>
+    <span class="line"><span class="line-in">build</span></span>
+    <span class="line"><span class="line-in">something</span></span>
+    <span class="line"><span class="line-in">intelligent.</span></span>
+  </h2>
+  <div class="contact-actions">
+    <a class="btn" href="mailto:wasiq119@gmail.com" data-magnetic><span>Write to me</span></a>
+    <a class="btn ghost" href="assets/WasiqMudasar_CV.pdf" download data-magnetic><span>Download CV</span></a>
   </div>
-</div>
+  <footer class="foot">
+    <p class="meta">Wasiq Mudasar<br>AI Full-Stack Engineer<br>Ilmenau / Germany</p>
+    <ul class="foot-links">
+      <li><a href="https://github.com/wasiq119-png" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/wasiq-mudasar" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="mailto:wasiq119@gmail.com">Email</a></li>
+    </ul>
+    <p class="meta foot-copy">© 2026</p>
+  </footer>
+</section>
 
-<!-- Neuro Tracker -->
-<div class="modal-overlay" id="modal-neuro" onclick="closeModalOverlay(event,'modal-neuro')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-neuro')" aria-label="Close"><i class="fas fa-times"></i></button>
-    <div class="modal-cover modal-cover-neuro">
-      <span class="modal-cover-emoji">🧠</span>
-      <div class="modal-cover-title">Neuro Tracker</div>
-    </div>
-    <div class="modal-content">
-      <h4>Overview</h4>
-      <p>A GDPR-compliant EEG data platform for clinical cognitive research. Streams real-time brainwave signals, manages informed consent workflows, and exports anonymised datasets for analysis.</p>
-      <h4>Compliance & Data</h4>
-      <p>Built-in consent form flow, pseudonymisation pipeline, and audit log. Data stored encrypted at rest. Researchers can export Alpha, Beta, and Gamma band data as CSV/HDF5.</p>
-      <h4>Tech Stack</h4>
-      <div class="modal-tags">
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">React</span>
-        <span class="tech-tag">EEG / BCI</span>
-        <span class="tech-tag">GDPR</span>
-        <span class="tech-tag">PostgreSQL</span>
-        <span class="tech-tag">WebSockets</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SCRIPTS ════════════════════════════ -->
-<script src="script.js"></script>
+</main>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
