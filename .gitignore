@@ -10,3 +10,8 @@ Thumbs.db
 *secret*.txt
 *.env
 .env.*
+
+# Build tooling / local media
+node_modules/
+_media/
+
